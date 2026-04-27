@@ -12,6 +12,10 @@ struct HabitModelTests {
         #expect(habit.frequency == .daily)
         #expect(habit.timesToComplete == 1)
         #expect(habit.notificationsEnabled == false)
+        #expect(habit.notificationHour == nil)
+        #expect(habit.notificationMinute == nil)
+        #expect(habit.resolvedNotificationHour == 9)
+        #expect(habit.resolvedNotificationMinute == 0)
         #expect(habit.customIntervalValue == nil)
         #expect(habit.customIntervalUnit == nil)
         #expect(habit.completions.isEmpty)
@@ -25,7 +29,9 @@ struct HabitModelTests {
             customIntervalValue: 3,
             customIntervalUnit: .weeks,
             timesToComplete: 5,
-            notificationsEnabled: true
+            notificationsEnabled: true,
+            notificationHour: 18,
+            notificationMinute: 45
         )
         #expect(habit.name == "Review goals")
         #expect(habit.frequency == .custom)
@@ -33,6 +39,10 @@ struct HabitModelTests {
         #expect(habit.customIntervalUnit == .weeks)
         #expect(habit.timesToComplete == 5)
         #expect(habit.notificationsEnabled == true)
+        #expect(habit.notificationHour == 18)
+        #expect(habit.notificationMinute == 45)
+        #expect(habit.resolvedNotificationHour == 18)
+        #expect(habit.resolvedNotificationMinute == 45)
     }
 
     @Test("Each habit gets a unique ID")

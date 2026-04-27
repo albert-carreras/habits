@@ -17,3 +17,5 @@ Pods/
 # Swift Package Manager
 .build/
 Package.resolved
+
+node_modules/

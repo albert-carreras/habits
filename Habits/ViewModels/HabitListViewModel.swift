@@ -3,10 +3,45 @@ import SwiftData
 
 @Observable
 final class HabitListViewModel {
-    var showingAddSheet = false
-    var habitToEdit: Habit?
+    var activeSheet: HabitListSheet?
     var habitToDelete: Habit?
     var showingDeleteConfirmation = false
+
+    var showingAddSheet: Bool {
+        get {
+            if case .add = activeSheet { return true }
+            return false
+        }
+        set {
+            if newValue {
+                presentAddSheet()
+            } else if showingAddSheet {
+                activeSheet = nil
+            }
+        }
+    }
+
+    var habitToEdit: Habit? {
+        get {
+            if case .edit(let habit) = activeSheet { return habit }
+            return nil
+        }
+        set {
+            if let newValue {
+                presentEditSheet(for: newValue)
+            } else if habitToEdit != nil {
+                activeSheet = nil
+            }
+        }
+    }
+
+    func presentAddSheet() {
+        activeSheet = .add
+    }
+
+    func presentEditSheet(for habit: Habit) {
+        activeSheet = .edit(habit)
+    }
 
     func completionCount(for habit: Habit, on date: Date = .now) -> Int {
         let periodStart = DateHelpers.periodStart(
@@ -221,5 +256,19 @@ final class HabitListViewModel {
         }
 
         HabitWidgetSyncService.sync(context: context)
+    }
+}
+
+enum HabitListSheet: Identifiable {
+    case add
+    case edit(Habit)
+
+    var id: String {
+        switch self {
+        case .add:
+            return "add"
+        case .edit(let habit):
+            return "edit-\(habit.id.uuidString)"
+        }
     }
 }

@@ -17,6 +17,25 @@ struct NotificationServiceTests {
         ])
     }
 
+    @Test("Notifications use configured habit time")
+    func notificationsUseConfiguredHabitTime() {
+        let from = makeDate(2026, 4, 27, hour: 10)
+        let habit = Habit(
+            name: "Meditate",
+            frequency: .daily,
+            startDate: makeDate(2026, 4, 1),
+            notificationHour: 15,
+            notificationMinute: 30
+        )
+
+        let dates = NotificationService.notificationDates(for: habit, from: from, limit: 2)
+
+        #expect(dates == [
+            makeDate(2026, 4, 27, hour: 15, minute: 30),
+            makeDate(2026, 4, 28, hour: 15, minute: 30)
+        ])
+    }
+
     @Test("Weekly notifications use the habit start weekday")
     func weeklyNotificationsUseStartWeekday() {
         let from = makeDate(2026, 4, 27, hour: 8)

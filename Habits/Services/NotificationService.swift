@@ -53,8 +53,8 @@ struct NotificationService {
                 habitStart: habit.startDate
             )
             var fireComponents = calendar.dateComponents([.year, .month, .day], from: dueDate)
-            fireComponents.hour = 9
-            fireComponents.minute = 0
+            fireComponents.hour = habit.resolvedNotificationHour
+            fireComponents.minute = habit.resolvedNotificationMinute
             fireComponents.second = 0
 
             if let fireDate = calendar.date(from: fireComponents), fireDate > date {

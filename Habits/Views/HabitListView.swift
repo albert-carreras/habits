@@ -33,11 +33,13 @@ struct HabitListView: View {
                     .padding(.bottom, 22)
             }
             .toolbar(.hidden, for: .navigationBar)
-            .sheet(isPresented: $viewModel.showingAddSheet) {
-                HabitFormView()
-            }
-            .sheet(item: $viewModel.habitToEdit) { habit in
-                HabitFormView(habit: habit)
+            .sheet(item: $viewModel.activeSheet) { sheet in
+                switch sheet {
+                case .add:
+                    HabitFormView()
+                case .edit(let habit):
+                    HabitFormView(habit: habit)
+                }
             }
             .alert("Delete Habit", isPresented: $viewModel.showingDeleteConfirmation) {
                 Button("Delete", role: .destructive) {
@@ -110,7 +112,7 @@ struct HabitListView: View {
 
     private var addButton: some View {
         Button {
-            viewModel.showingAddSheet = true
+            viewModel.presentAddSheet()
         } label: {
             Image(systemName: "plus")
                 .font(.system(size: 24, weight: AppTheme.FontWeight.semibold))
@@ -121,9 +123,10 @@ struct HabitListView: View {
                     in: Circle(),
                     tint: AppTheme.accent(for: colorScheme),
                     fillOpacity: colorScheme == .dark ? 0.68 : 0.82,
-                    interactive: true
+                    interactive: false
                 )
         }
+        .contentShape(Circle())
         .buttonStyle(BouncyPressStyle())
         .accessibilityLabel("Add habit")
         .accessibilityIdentifier("add-habit-button")
@@ -217,7 +220,7 @@ struct HabitListView: View {
             }
 
             Button {
-                viewModel.habitToEdit = habit
+                viewModel.presentEditSheet(for: habit)
             } label: {
                 Label("Edit", systemImage: "pencil")
             }

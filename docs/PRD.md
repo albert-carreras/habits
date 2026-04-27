@@ -28,7 +28,7 @@ Habits is a minimal, aesthetically pleasing iOS habit tracker. One screen, zero 
 | Custom Interval | Int + Unit | Every X days/weeks/months (only when frequency = Custom) |
 | Times to Complete | Int | ≥ 1, default 1. Represents a counter (e.g. "50 pushups") |
 | Start Date | Date | Defaults to today |
-| Notifications | Bool | On/Off toggle, default Off |
+| Notifications | Bool + Time | On/Off toggle, default Off. Reminder time defaults to 9:00 AM and is configurable per habit. |
 
 ## Screens & Interactions
 
@@ -40,7 +40,7 @@ Habits is a minimal, aesthetically pleasing iOS habit tracker. One screen, zero 
 
 ### Add/Edit Habit Sheet
 - Presented as a `.sheet` modal
-- Fields: name, frequency picker, custom interval (conditional), times-to-complete stepper, start date picker, notification toggle
+- Fields: name, frequency picker, custom interval (conditional), times-to-complete stepper, start date picker, notification toggle, notification time picker
 - Save / Cancel buttons
 - Styled with the same rounded, glassy card language as the main list
 
@@ -74,8 +74,8 @@ Habits is a minimal, aesthetically pleasing iOS habit tracker. One screen, zero 
 
 ## Notifications
 
-- When enabled for a habit, send a local notification at a sensible default time (9:00 AM) on the habit's frequency schedule
-- No notification customization in v1 (just on/off)
+- When enabled for a habit, send a local notification at the configured reminder time on the habit's frequency schedule
+- Reminder time defaults to 9:00 AM and can be changed in the add/edit form
 
 ## Non-Goals (v1)
 

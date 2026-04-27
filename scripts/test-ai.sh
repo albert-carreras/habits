@@ -102,6 +102,16 @@ ensure_project_current() {
 }
 
 run_script_regressions() {
+    if [[ "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' Habits/Info.plist)" != "false" ]]; then
+        echo "Habits/Info.plist must declare ITSAppUsesNonExemptEncryption=false" >&2
+        exit 1
+    fi
+
+    if [[ "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' HabitsWidget/Info.plist)" != "false" ]]; then
+        echo "HabitsWidget/Info.plist must declare ITSAppUsesNonExemptEncryption=false" >&2
+        exit 1
+    fi
+
     local tmp_dir
     tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/habits-app-sh-test.XXXXXX")"
     local bin_dir="$tmp_dir/bin"

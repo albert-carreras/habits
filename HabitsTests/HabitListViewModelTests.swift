@@ -194,9 +194,47 @@ struct HabitListViewModelTests {
     func initialState() {
         let vm = HabitListViewModel()
         #expect(!vm.showingAddSheet)
+        #expect(vm.activeSheet == nil)
         #expect(vm.habitToEdit == nil)
         #expect(vm.habitToDelete == nil)
         #expect(!vm.showingDeleteConfirmation)
+    }
+
+    @Test("Add sheet uses the active sheet route")
+    func presentAddSheet() {
+        let vm = HabitListViewModel()
+
+        vm.presentAddSheet()
+
+        #expect(vm.showingAddSheet)
+        #expect(vm.activeSheet?.id == "add")
+        #expect(vm.habitToEdit == nil)
+    }
+
+    @Test("Edit sheet uses the active sheet route")
+    func presentEditSheet() {
+        let vm = HabitListViewModel()
+        let habit = Habit(name: "Test")
+
+        vm.presentEditSheet(for: habit)
+
+        #expect(!vm.showingAddSheet)
+        #expect(vm.activeSheet?.id == "edit-\(habit.id.uuidString)")
+        #expect(vm.habitToEdit === habit)
+    }
+
+    @Test("Clearing sheet compatibility bindings dismisses the active route")
+    func clearingSheetBindingsDismissesActiveRoute() {
+        let vm = HabitListViewModel()
+        let habit = Habit(name: "Test")
+
+        vm.presentAddSheet()
+        vm.showingAddSheet = false
+        #expect(vm.activeSheet == nil)
+
+        vm.presentEditSheet(for: habit)
+        vm.habitToEdit = nil
+        #expect(vm.activeSheet == nil)
     }
 
     private func makeDate(_ year: Int, _ month: Int, _ day: Int, hour: Int = 0, minute: Int = 0) -> Date {

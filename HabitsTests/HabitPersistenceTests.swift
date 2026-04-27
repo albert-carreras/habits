@@ -168,7 +168,9 @@ struct HabitPersistenceTests {
             customIntervalUnit: .days,
             timesToComplete: 100,
             startDate: startDate,
-            notificationsEnabled: true
+            notificationsEnabled: true,
+            notificationHour: 20,
+            notificationMinute: 15
         )
         context.insert(habit)
         try context.save()
@@ -181,5 +183,7 @@ struct HabitPersistenceTests {
         #expect(fetched.timesToComplete == 100)
         #expect(fetched.startDate == startDate)
         #expect(fetched.notificationsEnabled == true)
+        #expect(fetched.notificationHour == 20)
+        #expect(fetched.notificationMinute == 15)
     }
 }

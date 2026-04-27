@@ -58,6 +58,8 @@ HabitsWidget/
 - `timesToComplete: Int`
 - `startDate: Date`
 - `notificationsEnabled: Bool`
+- `notificationHour: Int?`
+- `notificationMinute: Int?`
 - `createdAt: Date`
 - `completions: [HabitCompletion]` (relationship)
 
@@ -75,7 +77,7 @@ HabitsWidget/
 4. **Schedule dates come from start date** — the main list uses `startDate` as the anchor for weekly, monthly, yearly, and custom schedules so habits can be split into Today and Later.
 5. **Schedule rules are shared** — app logic and widget timeline logic both use `HabitSchedule` from `Habits/Shared`, with `DateHelpers` acting as the app-facing wrapper around the Swift enums. This keeps daily, weekly, monthly, yearly, custom interval, and clamped date behavior consistent across targets.
 6. **Widgets share data via App Group** — the app writes a JSON snapshot to `group.com.albertc.habits`; widgets read that snapshot through WidgetKit/AppIntents. The snapshot includes schedule metadata and completion records so widget timelines can recalculate current progress after day and period boundaries without requiring the app to relaunch. Widgets use the same start-date anchored schedule rules as the app, showing "Day off" on unscheduled days and count-style progress on due days. Snapshot writes return success/failure and log failures in debug builds.
-7. **Local notifications only** — scheduled via `UNUserNotificationCenter` after authorization is granted. The app creates upcoming one-shot notifications at 9:00 AM on the habit's actual scheduled dates, including custom intervals and clamped monthly dates, and removes/reschedules them whenever a habit is edited or deleted. If scheduling fails, partially added requests are removed and the habit is saved without reminders.
+7. **Local notifications only** — scheduled via `UNUserNotificationCenter` after authorization is granted. The app creates upcoming one-shot notifications at the habit's configured time on the actual scheduled dates, including custom intervals and clamped monthly dates, and removes/reschedules them whenever a habit is edited or deleted. Reminder time defaults to 9:00 AM and is stored as hour/minute fields on the habit. If scheduling fails, partially added requests are removed and the habit is saved without reminders.
 
 ## Design System
 

@@ -15,6 +15,7 @@ struct HabitFormView: View {
     @State private var timesToComplete: Int = 1
     @State private var startDate: Date = .now
     @State private var notificationsEnabled: Bool = false
+    @State private var notificationTime: Date = Self.makeNotificationTimeDate()
     @State private var isSaving = false
     @State private var notificationErrorMessage: String?
 
@@ -83,7 +84,14 @@ struct HabitFormView: View {
                         }
 
                         formSection("Reminders") {
-                            Toggle("Notifications", isOn: $notificationsEnabled)
+                            VStack(alignment: .leading, spacing: 8) {
+                                Toggle("Notifications", isOn: $notificationsEnabled)
+
+                                if notificationsEnabled {
+                                    DatePicker("Time", selection: $notificationTime, displayedComponents: .hourAndMinute)
+                                        .accessibilityIdentifier("notification-time-picker")
+                                }
+                            }
                         }
                     }
                     .padding(.horizontal, 20)
@@ -170,6 +178,10 @@ struct HabitFormView: View {
         timesToComplete = habit.timesToComplete
         startDate = habit.startDate
         notificationsEnabled = habit.notificationsEnabled
+        notificationTime = Self.makeNotificationTimeDate(
+            hour: habit.resolvedNotificationHour,
+            minute: habit.resolvedNotificationMinute
+        )
     }
 
     @MainActor
@@ -189,6 +201,8 @@ struct HabitFormView: View {
             habit.timesToComplete = timesToComplete
             habit.startDate = startDate
             habit.notificationsEnabled = notificationsEnabled
+            habit.notificationHour = notificationTimeComponents.hour
+            habit.notificationMinute = notificationTimeComponents.minute
             savedHabit = habit
         } else {
             let newHabit = Habit(
@@ -198,7 +212,9 @@ struct HabitFormView: View {
                 customIntervalUnit: frequency == .custom ? customIntervalUnit : nil,
                 timesToComplete: timesToComplete,
                 startDate: startDate,
-                notificationsEnabled: notificationsEnabled
+                notificationsEnabled: notificationsEnabled,
+                notificationHour: notificationTimeComponents.hour,
+                notificationMinute: notificationTimeComponents.minute
             )
             modelContext.insert(newHabit)
             savedHabit = newHabit
@@ -230,5 +246,25 @@ struct HabitFormView: View {
             print("HabitFormView failed to save context: \(error)")
             #endif
         }
+    }
+
+    private var notificationTimeComponents: (hour: Int, minute: Int) {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: notificationTime)
+        return (
+            components.hour ?? Habit.defaultNotificationHour,
+            components.minute ?? Habit.defaultNotificationMinute
+        )
+    }
+
+    private static func makeNotificationTimeDate(
+        hour: Int = Habit.defaultNotificationHour,
+        minute: Int = Habit.defaultNotificationMinute,
+        calendar: Calendar = .current
+    ) -> Date {
+        var components = calendar.dateComponents([.year, .month, .day], from: .now)
+        components.hour = hour
+        components.minute = minute
+        components.second = 0
+        return calendar.date(from: components) ?? .now
     }
 }

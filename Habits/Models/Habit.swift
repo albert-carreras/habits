@@ -21,6 +21,9 @@ enum CustomIntervalUnit: String, Codable, CaseIterable, Identifiable {
 
 @Model
 final class Habit {
+    static let defaultNotificationHour = 9
+    static let defaultNotificationMinute = 0
+
     var id: UUID
     var name: String
     var frequency: HabitFrequency
@@ -29,6 +32,8 @@ final class Habit {
     var timesToComplete: Int
     var startDate: Date
     var notificationsEnabled: Bool
+    var notificationHour: Int?
+    var notificationMinute: Int?
     var createdAt: Date
 
     @Relationship(deleteRule: .cascade, inverse: \HabitCompletion.habit)
@@ -41,7 +46,9 @@ final class Habit {
         customIntervalUnit: CustomIntervalUnit? = nil,
         timesToComplete: Int = 1,
         startDate: Date = .now,
-        notificationsEnabled: Bool = false
+        notificationsEnabled: Bool = false,
+        notificationHour: Int? = nil,
+        notificationMinute: Int? = nil
     ) {
         self.id = UUID()
         self.name = name
@@ -51,6 +58,24 @@ final class Habit {
         self.timesToComplete = timesToComplete
         self.startDate = startDate
         self.notificationsEnabled = notificationsEnabled
+        self.notificationHour = notificationHour
+        self.notificationMinute = notificationMinute
         self.createdAt = .now
+    }
+
+    var resolvedNotificationHour: Int {
+        guard let notificationHour, (0...23).contains(notificationHour) else {
+            return Self.defaultNotificationHour
+        }
+
+        return notificationHour
+    }
+
+    var resolvedNotificationMinute: Int {
+        guard let notificationMinute, (0...59).contains(notificationMinute) else {
+            return Self.defaultNotificationMinute
+        }
+
+        return notificationMinute
     }
 }

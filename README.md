@@ -34,7 +34,9 @@ change it before each upload. The build number is reserved as the previous
 build plus one every time `submit` runs. The submit state is stored at
 `~/.local/state/habits/submit.env`; override that path with
 `HABITS_SUBMIT_STATE_PATH`, or set `HABITS_APP_VERSION` for non-interactive
-marketing-version changes.
+marketing-version changes. The app and widget declare
+`ITSAppUsesNonExemptEncryption=false`, so App Store Connect does not require a
+manual export compliance answer after each upload.
 
 Defaults target the available `iPhone 17 Pro` simulator. Override with:
 
