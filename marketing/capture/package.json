@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "capture": "node capture.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "^24.40.0"
+  }
+}
+
