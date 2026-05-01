@@ -32,7 +32,16 @@ struct NotificationService {
     }
 
     static func removeNotification(for habit: Habit) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: notificationIdentifiers(for: habit))
+        let ids = notificationIdentifiers(for: habit)
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: ids)
+        center.removeDeliveredNotifications(withIdentifiers: ids)
+    }
+
+    static func removeAllNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        center.removeAllDeliveredNotifications()
     }
 
     static func notificationDates(

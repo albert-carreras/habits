@@ -1,10 +1,11 @@
 import SwiftUI
 import SwiftData
 
+@MainActor
 @Observable
 final class HabitListViewModel {
     var activeSheet: HabitListSheet?
-    var habitToDelete: Habit?
+    var deleteTarget: HabitListDeleteTarget?
     var showingDeleteConfirmation = false
 
     var showingAddSheet: Bool {
@@ -39,6 +40,15 @@ final class HabitListViewModel {
         activeSheet = .add
     }
 
+    func presentAddSheet(for mode: MainListMode) {
+        switch mode {
+        case .habits:
+            activeSheet = .add
+        case .things:
+            activeSheet = .addThing
+        }
+    }
+
     func presentEditSheet(for habit: Habit) {
         activeSheet = .edit(habit)
     }
@@ -59,7 +69,7 @@ final class HabitListViewModel {
         )
 
         return habit.completions
-            .filter { $0.date >= periodStart && $0.date < periodEnd }
+            .filter { $0.syncDeletedAt == nil && $0.date >= periodStart && $0.date < periodEnd }
             .reduce(0) { $0 + $1.count }
     }
 
@@ -103,10 +113,19 @@ final class HabitListViewModel {
             customUnit: habit.customIntervalUnit
         )
 
-        if let existing = habit.completions.first(where: { $0.date >= periodStart && $0.date < periodEnd }) {
-            context.delete(existing)
+        if let existing = completion(for: habit, periodStart: periodStart, periodEnd: periodEnd) {
+            if existing.syncDeletedAt == nil {
+                markCompletionDeleted(existing)
+            } else {
+                existing.syncDeletedAt = nil
+                existing.count = 1
+                existing.date = now
+                existing.periodStart = periodStart
+                markDirty(existing)
+            }
         } else {
-            let completion = HabitCompletion(date: now, count: 1, habit: habit)
+            let completion = HabitCompletion(date: now, periodStart: periodStart, count: 1, habit: habit)
+            markDirty(completion)
             context.insert(completion)
         }
 
@@ -119,6 +138,7 @@ final class HabitListViewModel {
         } else {
             toggleCompletion(for: habit, context: context)
         }
+        rescheduleNotificationIfNeeded(for: habit)
     }
 
     func incrementCompletion(for habit: Habit, context: ModelContext) {
@@ -139,10 +159,15 @@ final class HabitListViewModel {
             customUnit: habit.customIntervalUnit
         )
 
-        if let existing = habit.completions.first(where: { $0.date >= periodStart && $0.date < periodEnd }) {
+        if let existing = completion(for: habit, periodStart: periodStart, periodEnd: periodEnd) {
+            existing.syncDeletedAt = nil
             existing.count += 1
+            existing.date = now
+            existing.periodStart = periodStart
+            markDirty(existing)
         } else {
-            let completion = HabitCompletion(date: now, count: 1, habit: habit)
+            let completion = HabitCompletion(date: now, periodStart: periodStart, count: 1, habit: habit)
+            markDirty(completion)
             context.insert(completion)
         }
 
@@ -165,11 +190,12 @@ final class HabitListViewModel {
             customUnit: habit.customIntervalUnit
         )
 
-        let toRemove = habit.completions.filter { $0.date >= periodStart && $0.date < periodEnd }
+        let toRemove = habit.completions.filter { $0.syncDeletedAt == nil && $0.date >= periodStart && $0.date < periodEnd }
         for completion in toRemove {
-            context.delete(completion)
+            markCompletionDeleted(completion)
         }
 
+        rescheduleNotificationIfNeeded(for: habit)
         saveAndSync(context: context)
     }
 
@@ -194,19 +220,28 @@ final class HabitListViewModel {
         let toAdd = min(amount, remaining)
         guard toAdd > 0 else { return }
 
-        if let existing = habit.completions.first(where: { $0.date >= periodStart && $0.date < periodEnd }) {
+        if let existing = completion(for: habit, periodStart: periodStart, periodEnd: periodEnd) {
+            existing.syncDeletedAt = nil
             existing.count += toAdd
+            existing.date = now
+            existing.periodStart = periodStart
+            markDirty(existing)
         } else {
-            let completion = HabitCompletion(date: now, count: toAdd, habit: habit)
+            let completion = HabitCompletion(date: now, periodStart: periodStart, count: toAdd, habit: habit)
+            markDirty(completion)
             context.insert(completion)
         }
 
+        rescheduleNotificationIfNeeded(for: habit)
         saveAndSync(context: context)
     }
 
     func deleteHabit(_ habit: Habit, context: ModelContext) {
         NotificationService.removeNotification(for: habit)
-        context.delete(habit)
+        markDirty(habit, deletedAt: .now)
+        for completion in habit.completions where completion.syncDeletedAt == nil {
+            markCompletionDeleted(completion)
+        }
         saveAndSync(context: context)
     }
 
@@ -253,15 +288,49 @@ final class HabitListViewModel {
             #if DEBUG
             print("HabitListViewModel failed to save context: \(error)")
             #endif
+            return
         }
 
+        SyncService.schedulePush(context: context)
         HabitWidgetSyncService.sync(context: context)
+    }
+
+    private func completion(for habit: Habit, periodStart: Date, periodEnd: Date) -> HabitCompletion? {
+        habit.completions.first {
+            $0.periodStart == periodStart || ($0.date >= periodStart && $0.date < periodEnd)
+        }
+    }
+
+    private func rescheduleNotificationIfNeeded(for habit: Habit) {
+        guard habit.notificationsEnabled else { return }
+        Task {
+            await NotificationService.scheduleNotification(for: habit)
+        }
+    }
+
+    private func markCompletionDeleted(_ completion: HabitCompletion) {
+        completion.count = 0
+        markDirty(completion, deletedAt: .now)
+    }
+
+    private func markDirty(_ habit: Habit, deletedAt: Date? = nil) {
+        habit.syncUpdatedAt = .now
+        habit.syncDeletedAt = deletedAt
+        habit.syncNeedsPush = true
+    }
+
+    private func markDirty(_ completion: HabitCompletion, deletedAt: Date? = nil) {
+        completion.syncUpdatedAt = .now
+        completion.syncDeletedAt = deletedAt
+        completion.syncNeedsPush = true
     }
 }
 
 enum HabitListSheet: Identifiable {
     case add
     case edit(Habit)
+    case addThing
+    case editThing(Thing)
 
     var id: String {
         switch self {
@@ -269,6 +338,48 @@ enum HabitListSheet: Identifiable {
             return "add"
         case .edit(let habit):
             return "edit-\(habit.id.uuidString)"
+        case .addThing:
+            return "add-thing"
+        case .editThing(let thing):
+            return "edit-thing-\(thing.id.uuidString)"
         }
     }
+}
+
+enum HabitListDeleteTarget {
+    case habit(Habit)
+    case thing(Thing)
+
+    var title: String {
+        switch self {
+        case .habit:
+            return "Delete Habit"
+        case .thing:
+            return "Delete Thing"
+        }
+    }
+
+    var message: String {
+        switch self {
+        case .habit(let habit):
+            return "Are you sure you want to delete \"\(habit.name)\"? This cannot be undone."
+        case .thing(let thing):
+            return "Are you sure you want to delete \"\(thing.title)\"? This cannot be undone."
+        }
+    }
+}
+
+enum MainListMode: String, CaseIterable, Identifiable {
+    case habits
+    case things
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .habits: return "Habits"
+        case .things: return "Things"
+        }
+    }
+
 }

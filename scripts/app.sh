@@ -5,9 +5,11 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
 SCHEME="${HABITS_SCHEME:-Habits}"
+MAC_SCHEME="${HABITS_MAC_SCHEME:-HabitsMac}"
 PROJECT="${HABITS_PROJECT:-Habits.xcodeproj}"
 PRODUCT_NAME="${HABITS_PRODUCT_NAME:-Habits}"
 BUNDLE_ID="${HABITS_BUNDLE_ID:-com.albertc.habit}"
+MAC_BUNDLE_ID="${HABITS_MAC_BUNDLE_ID:-com.albertc.habit.mac}"
 DERIVED_DATA="${HABITS_DERIVED_DATA:-/tmp/habits-app-derived-data}"
 LOG_DIR="${HABITS_LOG_DIR:-/tmp/habits-logs}"
 SIMULATOR_NAME="${HABITS_SIMULATOR_NAME:-iPhone 17 Pro}"
@@ -20,36 +22,44 @@ ASC_ISSUER_ID="${HABITS_ASC_ISSUER_ID:-}"
 SUBMIT_STATE_PATH="${HABITS_SUBMIT_STATE_PATH:-${XDG_STATE_HOME:-$HOME/.local/state}/habits/submit.env}"
 APP_VERSION=""
 BUILD_NUMBER=""
+LAST_BUILT_APP_PATH=""
 
 usage() {
     cat <<'USAGE'
 Usage: ./scripts/app.sh <command>
 
 Commands:
-  sim          Build, install, and launch the Debug app in the Simulator.
-  phone        Build, install, and launch the Debug app on the iPhone named "aci".
-  phone-prod   Build, install, and launch the Release app on the iPhone named "aci".
-  submit       Archive Release and upload it to App Store Connect.
+  sim            Build, install, and launch the Debug app in the Simulator.
+  phone          Build, install, and launch the Debug app on the iPhone named "aci".
+  phone-prod     Build, install, and launch the Release app on the iPhone named "aci".
+  mac-test       Build the macOS app without code signing (CI/verification).
+  mac-dmg        Build Release macOS and package as a DMG for distribution.
+  submit         Archive Release iOS and upload to App Store Connect.
+  mac-submit     Archive Release macOS and upload to Mac App Store.
 
 Aliases:
   simulator, run-sim
   iphone, device, run-phone
   iphone-prod, device-prod, prod-phone
   store, upload
+  mac-store, mac-upload
 
 Environment:
   HABITS_SIMULATOR_NAME    Simulator name. Defaults to iPhone 17 Pro.
   HABITS_DEVICE_NAME       Physical device name. Defaults to aci.
+  HABITS_MAC_SCHEME        macOS scheme. Defaults to HabitsMac.
+  HABITS_MAC_BUNDLE_ID     macOS bundle ID. Defaults to com.albertc.habit.mac.
   HABITS_TEAM_ID           Apple Developer team ID. Defaults to Albert Carreras (YH4QJW8XNH).
   HABITS_DERIVED_DATA      DerivedData path. Defaults to /tmp/habits-app-derived-data.
-  HABITS_ARCHIVE_PATH      Archive path for submit. Defaults to /tmp/habits-archives/Habits-<timestamp>.xcarchive.
-  HABITS_EXPORT_PATH       Export/upload output path for submit.
+  HABITS_ARCHIVE_PATH      Archive path for submit/mac-submit. Defaults to /tmp/habits-archives/<name>-<timestamp>.xcarchive.
+  HABITS_EXPORT_PATH       Export/upload output path for submit/mac-submit.
   HABITS_SUBMIT_STATE_PATH Path that stores the last submitted version/build.
                            Defaults to ~/.local/state/habits/submit.env.
-  HABITS_APP_VERSION       Non-interactive marketing version override for submit.
+  HABITS_APP_VERSION       Non-interactive marketing version override for submit/mac-submit.
                            Stored for future submit prompts when provided.
+  HABITS_DMG_DIR           Output directory for mac-dmg. Defaults to /tmp/habits-dmg.
 
-App Store Connect API key auth for submit:
+App Store Connect API key auth for submit/mac-submit:
   HABITS_ASC_KEY_PATH      Path to AuthKey_<key-id>.p8.
   HABITS_ASC_KEY_ID        App Store Connect key ID.
   HABITS_ASC_ISSUER_ID     App Store Connect issuer ID.
@@ -58,6 +68,10 @@ If the App Store Connect variables are omitted, xcodebuild uses the Apple
 account configured in Xcode.
 USAGE
 }
+
+# ---------------------------------------------------------------------------
+# Utility helpers
+# ---------------------------------------------------------------------------
 
 require_tool() {
     if ! command -v "$1" >/dev/null 2>&1; then
@@ -99,6 +113,10 @@ resolve_simulator_udid() {
     exit 1
 }
 
+# ---------------------------------------------------------------------------
+# Build-setting helpers
+# ---------------------------------------------------------------------------
+
 signing_args() {
     if [[ -n "$TEAM_ID" ]]; then
         printf '%s\n' "DEVELOPMENT_TEAM=$TEAM_ID"
@@ -111,17 +129,60 @@ provisioning_args() {
     fi
 }
 
+device_provisioning_args() {
+    provisioning_args
+    if [[ "$ALLOW_PROVISIONING_UPDATES" == "1" ]]; then
+        printf '%s\n' "-allowProvisioningDeviceRegistration"
+    fi
+}
+
 version_args() {
     printf '%s\n' "MARKETING_VERSION=$APP_VERSION"
     printf '%s\n' "CURRENT_PROJECT_VERSION=$BUILD_NUMBER"
 }
+
+auth_args() {
+    if [[ -z "$ASC_KEY_PATH" && -z "$ASC_KEY_ID" && -z "$ASC_ISSUER_ID" ]]; then
+        return
+    fi
+    printf '%s\n' "-authenticationKeyPath"
+    printf '%s\n' "$ASC_KEY_PATH"
+    printf '%s\n' "-authenticationKeyID"
+    printf '%s\n' "$ASC_KEY_ID"
+    printf '%s\n' "-authenticationKeyIssuerID"
+    printf '%s\n' "$ASC_ISSUER_ID"
+}
+
+validate_auth_args() {
+    local has_any_auth=0
+    if [[ -n "$ASC_KEY_PATH" || -n "$ASC_KEY_ID" || -n "$ASC_ISSUER_ID" ]]; then
+        has_any_auth=1
+    fi
+    if [[ "$has_any_auth" == "0" ]]; then
+        return
+    fi
+    if [[ -z "$ASC_KEY_PATH" || -z "$ASC_KEY_ID" || -z "$ASC_ISSUER_ID" ]]; then
+        echo "Set HABITS_ASC_KEY_PATH, HABITS_ASC_KEY_ID, and HABITS_ASC_ISSUER_ID together." >&2
+        exit 2
+    fi
+}
+
+collect_args() {
+    local fn="$1"
+    while IFS= read -r arg; do
+        printf '%s\n' "$arg"
+    done < <("$fn")
+}
+
+# ---------------------------------------------------------------------------
+# Version / state helpers
+# ---------------------------------------------------------------------------
 
 project_setting() {
     local setting="$1"
     if [[ ! -f project.yml ]]; then
         return
     fi
-
     awk -F: -v setting="$setting" '
         $1 ~ "^[[:space:]]*" setting "[[:space:]]*$" {
             value = $2
@@ -137,7 +198,6 @@ submit_state_value() {
     if [[ ! -f "$SUBMIT_STATE_PATH" ]]; then
         return
     fi
-
     awk -F= -v key="$key" '
         $1 == key {
             value = substr($0, length(key) + 2)
@@ -171,7 +231,6 @@ write_submit_state() {
     local build_number="$2"
     local state_dir
     state_dir="$(dirname "$SUBMIT_STATE_PATH")"
-
     mkdir -p "$state_dir"
     local tmp_path="$SUBMIT_STATE_PATH.tmp.$$"
     {
@@ -211,46 +270,13 @@ resolve_submit_version() {
     write_submit_state "$APP_VERSION" "$BUILD_NUMBER"
 }
 
-device_provisioning_args() {
-    provisioning_args
-    if [[ "$ALLOW_PROVISIONING_UPDATES" == "1" ]]; then
-        printf '%s\n' "-allowProvisioningDeviceRegistration"
-    fi
-}
-
-auth_args() {
-    if [[ -z "$ASC_KEY_PATH" && -z "$ASC_KEY_ID" && -z "$ASC_ISSUER_ID" ]]; then
-        return
-    fi
-
-    printf '%s\n' "-authenticationKeyPath"
-    printf '%s\n' "$ASC_KEY_PATH"
-    printf '%s\n' "-authenticationKeyID"
-    printf '%s\n' "$ASC_KEY_ID"
-    printf '%s\n' "-authenticationKeyIssuerID"
-    printf '%s\n' "$ASC_ISSUER_ID"
-}
-
-validate_auth_args() {
-    local has_any_auth=0
-    if [[ -n "$ASC_KEY_PATH" || -n "$ASC_KEY_ID" || -n "$ASC_ISSUER_ID" ]]; then
-        has_any_auth=1
-    fi
-
-    if [[ "$has_any_auth" == "0" ]]; then
-        return
-    fi
-
-    if [[ -z "$ASC_KEY_PATH" || -z "$ASC_KEY_ID" || -z "$ASC_ISSUER_ID" ]]; then
-        echo "Set HABITS_ASC_KEY_PATH, HABITS_ASC_KEY_ID, and HABITS_ASC_ISSUER_ID together." >&2
-        exit 2
-    fi
-}
+# ---------------------------------------------------------------------------
+# xcodebuild runner
+# ---------------------------------------------------------------------------
 
 run_xcodebuild() {
     local label="$1"
     shift
-
     mkdir -p "$LOG_DIR"
     local log_file="$LOG_DIR/${label}.log"
 
@@ -261,21 +287,23 @@ run_xcodebuild() {
     xcodebuild "$@" 2>&1 | tee "$log_file"
 }
 
+# ---------------------------------------------------------------------------
+# Build helpers
+# ---------------------------------------------------------------------------
+
 build_app() {
-    local configuration="$1"
-    local destination="$2"
-    local label="$3"
-    shift 3
+    local scheme="$1"
+    local configuration="$2"
+    local destination="$3"
+    local label="$4"
+    shift 4
 
     local args=()
-    while IFS= read -r arg; do
-        args+=("$arg")
-    done < <(signing_args)
+    while IFS= read -r arg; do args+=("$arg"); done < <(signing_args)
 
-    # macOS Bash 3.2 treats empty arrays as unset under `set -u`.
     run_xcodebuild "$label" \
         -project "$PROJECT" \
-        -scheme "$SCHEME" \
+        -scheme "$scheme" \
         -configuration "$configuration" \
         -destination "$destination" \
         -derivedDataPath "$DERIVED_DATA" \
@@ -287,7 +315,12 @@ build_app() {
 find_built_app() {
     local configuration="$1"
     local platform="$2"
-    local products_dir="$DERIVED_DATA/Build/Products/${configuration}-${platform}"
+    local products_dir
+    if [[ -n "$platform" ]]; then
+        products_dir="$DERIVED_DATA/Build/Products/${configuration}-${platform}"
+    else
+        products_dir="$DERIVED_DATA/Build/Products/${configuration}"
+    fi
 
     if [[ ! -d "$products_dir" ]]; then
         echo "Build products directory not found: $products_dir" >&2
@@ -297,60 +330,18 @@ find_built_app() {
     local app_path
     app_path="$(find "$products_dir" -maxdepth 2 -type d -name "$PRODUCT_NAME.app" -print -quit)"
     if [[ -z "$app_path" ]]; then
+        local app_paths=()
+        while IFS= read -r path; do app_paths+=("$path"); done < <(find "$products_dir" -maxdepth 1 -type d -name "*.app" -print)
+        if [[ ${#app_paths[@]} -eq 1 ]]; then
+            app_path="${app_paths[0]}"
+        fi
+    fi
+    if [[ -z "$app_path" ]]; then
         echo "Could not find $PRODUCT_NAME.app under $products_dir" >&2
         exit 1
     fi
 
     printf '%s\n' "$app_path"
-}
-
-run_simulator() {
-    require_tool xcodebuild
-    require_tool xcrun
-
-    local udid
-    udid="$(resolve_simulator_udid)"
-    local destination="id=$udid"
-
-    build_app Debug "$destination" simulator-debug
-
-    local app_path
-    app_path="$(find_built_app Debug iphonesimulator)"
-
-    echo
-    echo "Booting simulator $udid"
-    xcrun simctl boot "$udid" >/dev/null 2>&1 || true
-    xcrun simctl bootstatus "$udid" -b
-    if command -v open >/dev/null 2>&1; then
-        open -a Simulator >/dev/null 2>&1 || true
-    fi
-
-    echo "Installing and launching $app_path"
-    xcrun simctl install "$udid" "$app_path"
-    xcrun simctl terminate "$udid" "$BUNDLE_ID" >/dev/null 2>&1 || true
-    xcrun simctl launch "$udid" "$BUNDLE_ID"
-}
-
-run_phone() {
-    local configuration="$1"
-    local label="$2"
-    require_tool xcodebuild
-    require_tool xcrun
-
-    local provisioning=()
-    while IFS= read -r arg; do
-        provisioning+=("$arg")
-    done < <(device_provisioning_args)
-
-    build_app "$configuration" "platform=iOS,name=$DEVICE_NAME" "$label" ${provisioning[@]+"${provisioning[@]}"}
-
-    local app_path
-    app_path="$(find_built_app "$configuration" iphoneos)"
-
-    echo
-    echo "Installing and launching $app_path on $DEVICE_NAME"
-    xcrun devicectl device install app --device "$DEVICE_NAME" "$app_path"
-    xcrun devicectl device process launch --device "$DEVICE_NAME" --terminate-existing "$BUNDLE_ID"
 }
 
 create_export_options_plist() {
@@ -385,7 +376,115 @@ $team_entry
 PLIST
 }
 
-submit_to_store() {
+# ---------------------------------------------------------------------------
+# Simulator / device commands
+# ---------------------------------------------------------------------------
+
+run_simulator() {
+    require_tool xcodebuild
+    require_tool xcrun
+
+    local udid
+    udid="$(resolve_simulator_udid)"
+    local destination="id=$udid"
+
+    build_app "$SCHEME" Debug "$destination" simulator-debug
+
+    local app_path
+    app_path="$(find_built_app Debug iphonesimulator)"
+
+    echo
+    echo "Booting simulator $udid"
+    xcrun simctl boot "$udid" >/dev/null 2>&1 || true
+    xcrun simctl bootstatus "$udid" -b
+    if command -v open >/dev/null 2>&1; then
+        open -a Simulator >/dev/null 2>&1 || true
+    fi
+
+    echo "Installing and launching $app_path"
+    xcrun simctl install "$udid" "$app_path"
+    xcrun simctl terminate "$udid" "$BUNDLE_ID" >/dev/null 2>&1 || true
+    xcrun simctl launch "$udid" "$BUNDLE_ID"
+}
+
+run_phone() {
+    local configuration="$1"
+    local label="$2"
+    require_tool xcodebuild
+    require_tool xcrun
+
+    local provisioning=()
+    while IFS= read -r arg; do provisioning+=("$arg"); done < <(device_provisioning_args)
+
+    build_app "$SCHEME" "$configuration" "platform=iOS,name=$DEVICE_NAME" "$label" ${provisioning[@]+"${provisioning[@]}"}
+
+    local app_path
+    app_path="$(find_built_app "$configuration" iphoneos)"
+
+    echo
+    echo "Installing and launching $app_path on $DEVICE_NAME"
+    xcrun devicectl device install app --device "$DEVICE_NAME" "$app_path"
+    xcrun devicectl device process launch --device "$DEVICE_NAME" --terminate-existing "$BUNDLE_ID"
+}
+
+# ---------------------------------------------------------------------------
+# macOS build commands
+# ---------------------------------------------------------------------------
+
+build_mac() {
+    local configuration="$1"
+    local allows_unsigned="$2"
+    require_tool xcodebuild
+
+    local extra_args=()
+    if [[ "$allows_unsigned" == "1" ]]; then
+        extra_args+=("CODE_SIGNING_ALLOWED=NO")
+    else
+        while IFS= read -r arg; do extra_args+=("$arg"); done < <(provisioning_args)
+    fi
+
+    local label
+    label="mac-$(printf '%s' "$configuration" | tr '[:upper:]' '[:lower:]')"
+    build_app "$MAC_SCHEME" "$configuration" "platform=macOS" "$label" ${extra_args[@]+"${extra_args[@]}"}
+    LAST_BUILT_APP_PATH="$(find_built_app "$configuration" "")"
+}
+
+build_mac_test() {
+    build_mac Debug 1
+
+    echo
+    echo "Build verified (unsigned): $LAST_BUILT_APP_PATH"
+}
+
+build_mac_dmg() {
+    require_tool hdiutil
+
+    build_mac Release 0
+
+    local dmg_dir="${HABITS_DMG_DIR:-/tmp/habits-dmg}"
+    local dmg_path="$dmg_dir/$PRODUCT_NAME.dmg"
+    mkdir -p "$dmg_dir"
+
+    local staging="$dmg_dir/.staging"
+    rm -rf "$staging"
+    mkdir -p "$staging"
+    cp -R "$LAST_BUILT_APP_PATH" "$staging/"
+    ln -s /Applications "$staging/Applications"
+
+    hdiutil create -volname "$PRODUCT_NAME" -srcfolder "$staging" -ov -format UDZO "$dmg_path"
+    rm -rf "$staging"
+
+    echo
+    echo "DMG created: $dmg_path"
+}
+
+# ---------------------------------------------------------------------------
+# App Store submission (shared by iOS and macOS)
+# ---------------------------------------------------------------------------
+
+archive_and_upload() {
+    local scheme="$1"
+    local platform_dest="$2"
     require_tool xcodebuild
     validate_auth_args
     resolve_submit_version
@@ -404,18 +503,10 @@ submit_to_store() {
     local version=()
     local provisioning=()
     local auth=()
-    while IFS= read -r arg; do
-        signing+=("$arg")
-    done < <(signing_args)
-    while IFS= read -r arg; do
-        version+=("$arg")
-    done < <(version_args)
-    while IFS= read -r arg; do
-        provisioning+=("$arg")
-    done < <(provisioning_args)
-    while IFS= read -r arg; do
-        auth+=("$arg")
-    done < <(auth_args)
+    while IFS= read -r arg; do signing+=("$arg"); done < <(signing_args)
+    while IFS= read -r arg; do version+=("$arg"); done < <(version_args)
+    while IFS= read -r arg; do provisioning+=("$arg"); done < <(provisioning_args)
+    while IFS= read -r arg; do auth+=("$arg"); done < <(auth_args)
 
     if [[ ${#auth[@]} -eq 0 ]]; then
         echo "No App Store Connect API key env vars set; xcodebuild will use the account configured in Xcode."
@@ -424,9 +515,9 @@ submit_to_store() {
 
     run_xcodebuild archive-release \
         -project "$PROJECT" \
-        -scheme "$SCHEME" \
+        -scheme "$scheme" \
         -configuration Release \
-        -destination "generic/platform=iOS" \
+        -destination "$platform_dest" \
         -archivePath "$archive_path" \
         -derivedDataPath "$DERIVED_DATA" \
         ${signing[@]+"${signing[@]}"} \
@@ -448,6 +539,10 @@ submit_to_store() {
     echo "Export output: $export_path"
 }
 
+# ---------------------------------------------------------------------------
+# Command dispatch
+# ---------------------------------------------------------------------------
+
 COMMAND="${1:-}"
 case "$COMMAND" in
     sim|simulator|run-sim)
@@ -462,9 +557,21 @@ case "$COMMAND" in
         ensure_project_current
         run_phone Release phone-release
         ;;
+    mac-test)
+        ensure_project_current
+        build_mac_test
+        ;;
+    mac-dmg)
+        ensure_project_current
+        build_mac_dmg
+        ;;
     submit|store|upload)
         ensure_project_current
-        submit_to_store
+        archive_and_upload "$SCHEME" "generic/platform=iOS"
+        ;;
+    mac-submit|mac-store|mac-upload)
+        ensure_project_current
+        archive_and_upload "$MAC_SCHEME" "generic/platform=macOS"
         ;;
     -h|--help|help)
         usage

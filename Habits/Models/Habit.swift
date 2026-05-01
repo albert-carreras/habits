@@ -21,6 +21,9 @@ enum CustomIntervalUnit: String, Codable, CaseIterable, Identifiable {
 
 @Model
 final class Habit {
+    static let maxNameLength = 100
+    static let maxTimesToComplete = 9999
+    static let maxCustomIntervalValue = 365
     static let defaultNotificationHour = 9
     static let defaultNotificationMinute = 0
 
@@ -35,11 +38,16 @@ final class Habit {
     var notificationHour: Int?
     var notificationMinute: Int?
     var createdAt: Date
+    var syncUpdatedAt: Date?
+    var syncDeletedAt: Date?
+    var syncRemoteUpdatedAt: Date?
+    var syncNeedsPush: Bool?
 
     @Relationship(deleteRule: .cascade, inverse: \HabitCompletion.habit)
     var completions: [HabitCompletion] = []
 
     init(
+        id: UUID = UUID(),
         name: String,
         frequency: HabitFrequency = .daily,
         customIntervalValue: Int? = nil,
@@ -48,9 +56,14 @@ final class Habit {
         startDate: Date = .now,
         notificationsEnabled: Bool = false,
         notificationHour: Int? = nil,
-        notificationMinute: Int? = nil
+        notificationMinute: Int? = nil,
+        createdAt: Date = .now,
+        syncUpdatedAt: Date? = .now,
+        syncDeletedAt: Date? = nil,
+        syncRemoteUpdatedAt: Date? = nil,
+        syncNeedsPush: Bool? = true
     ) {
-        self.id = UUID()
+        self.id = id
         self.name = name
         self.frequency = frequency
         self.customIntervalValue = customIntervalValue
@@ -60,7 +73,11 @@ final class Habit {
         self.notificationsEnabled = notificationsEnabled
         self.notificationHour = notificationHour
         self.notificationMinute = notificationMinute
-        self.createdAt = .now
+        self.createdAt = createdAt
+        self.syncUpdatedAt = syncUpdatedAt
+        self.syncDeletedAt = syncDeletedAt
+        self.syncRemoteUpdatedAt = syncRemoteUpdatedAt
+        self.syncNeedsPush = syncNeedsPush
     }
 
     var resolvedNotificationHour: Int {

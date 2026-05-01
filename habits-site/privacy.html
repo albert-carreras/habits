@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Habits</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f8f0df;
+      --surface: #efe2ca;
+      --border: #d2bd96;
+      --text: #1c1721;
+      --muted: #756f7f;
+      --primary: #5a376b;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #100b14;
+        --surface: #1b1223;
+        --border: #3a2a45;
+        --text: #f6ead8;
+        --muted: #b1a2bd;
+        --primary: #8e63ad;
+      }
+    }
+
+    body {
+      font-family: -apple-system, "Helvetica Neue", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 64px 24px 120px;
+    }
+
+    a.back {
+      display: inline-block;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 32px;
+    }
+
+    a.back:hover { text-decoration: underline; }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .updated {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 28px;
+      margin-bottom: 8px;
+    }
+
+    p, ul {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    ul { padding-left: 20px; }
+    li { margin-bottom: 4px; }
+
+    a { color: var(--primary); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="/">&larr; Habits</a>
+
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: April 29, 2026</p>
+
+    <h2>Summary</h2>
+    <p>Habits is designed to respect your privacy. Your data stays on your device unless you explicitly choose to sync it.</p>
+
+    <h2>Data Storage</h2>
+    <p>All habit and thing data is stored locally on your device using SwiftData. No data leaves your device unless you opt in to cloud sync.</p>
+
+    <h2>Cloud Sync (Optional)</h2>
+    <p>If you sign in with Apple or Google, your data is synced to a Supabase-hosted database so it can be accessed across your devices. You can delete your account and all cloud data at any time from Settings.</p>
+
+    <h2>Notifications</h2>
+    <p>Habits uses local notifications only. No data is sent to external push notification services. Notification scheduling happens entirely on your device.</p>
+
+    <h2>Analytics & Tracking</h2>
+    <p>Habits does not include any analytics SDKs, tracking pixels, or third-party advertising. We do not collect usage data.</p>
+
+    <h2>Data We Do Not Collect</h2>
+    <ul>
+      <li>Personal information beyond your sign-in identity (if you choose to create an account)</li>
+      <li>Location data</li>
+      <li>Contacts or photos</li>
+      <li>Device identifiers for advertising</li>
+    </ul>
+
+    <h2>Data Export & Deletion</h2>
+    <p>You can export all your data as a JSON file from Settings at any time. You can delete individual habits and things, or delete your entire account and cloud data from Settings.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy? Reach out through the App Store listing.</p>
+  </div>
+</body>
+</html>

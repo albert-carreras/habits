@@ -3,6 +3,10 @@ build/
 DerivedData/
 *.xcuserdata
 *.xcworkspace
+!Habits.xcodeproj/project.xcworkspace/
+!Habits.xcodeproj/project.xcworkspace/xcshareddata/
+!Habits.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+!Habits.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 xcuserdata/
 *.xcscmblueprint
 
@@ -16,6 +20,10 @@ Pods/
 
 # Swift Package Manager
 .build/
-Package.resolved
 
 node_modules/
+
+supabase/.temp/
+
+# Local auth secrets
+AuthKey_*.p8

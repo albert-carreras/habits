@@ -4,6 +4,7 @@ import SwiftData
 @testable import Habits
 
 @Suite("ViewModel + SwiftData Integration")
+@MainActor
 struct ViewModelIntegrationTests {
     let viewModel = HabitListViewModel()
 
@@ -105,7 +106,7 @@ struct ViewModelIntegrationTests {
         #expect(viewModel.completionCount(for: habit) == 0)
     }
 
-    @Test("deleteHabit removes from context")
+    @Test("deleteHabit tombstones the habit")
     @MainActor
     func deleteHabit() throws {
         let context = try makeContext()
@@ -118,7 +119,9 @@ struct ViewModelIntegrationTests {
 
         let descriptor = FetchDescriptor<Habit>()
         let remaining = try context.fetch(descriptor)
-        #expect(remaining.isEmpty)
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.syncDeletedAt != nil)
+        #expect(remaining.first?.syncNeedsPush == true)
     }
 
     @Test("Weekly habit: completion on Monday counts all week")
@@ -227,6 +230,56 @@ struct ViewModelIntegrationTests {
         viewModel.toggleCompletion(for: habit, context: context)
         try context.save()
         #expect(!viewModel.isCompleted(habit: habit))
+    }
+
+    @Test("Toggle three times: off → on → off → on works")
+    @MainActor
+    func toggleTripleRoundTrip() throws {
+        let context = try makeContext()
+        let habit = Habit(name: "Run", timesToComplete: 1)
+        context.insert(habit)
+        try context.save()
+
+        viewModel.toggleCompletion(for: habit, context: context)
+        try context.save()
+        #expect(viewModel.isCompleted(habit: habit))
+
+        viewModel.toggleCompletion(for: habit, context: context)
+        try context.save()
+        #expect(!viewModel.isCompleted(habit: habit))
+
+        viewModel.toggleCompletion(for: habit, context: context)
+        try context.save()
+        #expect(viewModel.isCompleted(habit: habit))
+    }
+
+    @Test("Toggling multiple habits does not interfere")
+    @MainActor
+    func toggleMultipleHabits() throws {
+        let context = try makeContext()
+        let habitA = Habit(name: "A", timesToComplete: 1)
+        let habitB = Habit(name: "B", timesToComplete: 1)
+        context.insert(habitA)
+        context.insert(habitB)
+        try context.save()
+
+        viewModel.toggleCompletion(for: habitA, context: context)
+        try context.save()
+        #expect(viewModel.isCompleted(habit: habitA))
+
+        viewModel.toggleCompletion(for: habitB, context: context)
+        try context.save()
+        #expect(viewModel.isCompleted(habit: habitB))
+
+        viewModel.toggleCompletion(for: habitA, context: context)
+        try context.save()
+        #expect(!viewModel.isCompleted(habit: habitA))
+        #expect(viewModel.isCompleted(habit: habitB))
+
+        viewModel.toggleCompletion(for: habitA, context: context)
+        try context.save()
+        #expect(viewModel.isCompleted(habit: habitA))
+        #expect(viewModel.isCompleted(habit: habitB))
     }
 
     @Test("Widget snapshot reflects habit progress")

@@ -1,6 +1,7 @@
 # Habits
 
-A minimal iOS habit tracker built with SwiftUI and SwiftData.
+A minimal iOS app for recurring habits and one-off Things, built with SwiftUI,
+SwiftData, WidgetKit, local notifications, and Supabase-backed account backup.
 
 ## Agent-Friendly Checks
 
@@ -11,6 +12,7 @@ Use the scripts in `scripts/` when changing the app from the command line:
 ./scripts/test-ai.sh --unit   # unit tests only
 ./scripts/test-ai.sh --ui     # XCUITest smoke flow only
 ./scripts/test-ai.sh --build  # build only
+./scripts/test-ai.sh --kill   # stop a stuck agent test/build run
 ./scripts/test-visual.sh      # build, launch in Simulator, save a screenshot
 ```
 

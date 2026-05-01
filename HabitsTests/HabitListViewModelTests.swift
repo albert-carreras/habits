@@ -4,6 +4,7 @@ import SwiftData
 @testable import Habits
 
 @Suite("HabitListViewModel")
+@MainActor
 struct HabitListViewModelTests {
     let viewModel = HabitListViewModel()
 
@@ -196,7 +197,7 @@ struct HabitListViewModelTests {
         #expect(!vm.showingAddSheet)
         #expect(vm.activeSheet == nil)
         #expect(vm.habitToEdit == nil)
-        #expect(vm.habitToDelete == nil)
+        #expect(vm.deleteTarget == nil)
         #expect(!vm.showingDeleteConfirmation)
     }
 

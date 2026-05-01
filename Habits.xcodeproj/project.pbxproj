@@ -7,40 +7,115 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00AD4015D3A4E1302015B13A /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAF2DE7B1C05B526B34E0727 /* GoogleSignIn */; };
+		093A0B164BF98E5E86A6F8A2 /* AppHapticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781063FB6B7A402CFD8AD16A /* AppHapticsTests.swift */; };
 		0969090A060C4E6721BE4F6F /* HabitSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB0E63BA25EA266723135E /* HabitSchedule.swift */; };
 		0BFDED9DACF42BCD2B3E56D1 /* LockScreenWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E90377FC764903DAA998CF /* LockScreenWidgetView.swift */; };
+		0CFD521C54E2003CEF30FE4A /* SupabaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235095C98F2EDE25FFC1B08 /* SupabaseServiceTests.swift */; };
+		0F9A2675A83021BE6E534210 /* MacHabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9D751A13AA85265F1DF34C /* MacHabitListView.swift */; };
 		10414DA2F2C8A305F22E2099 /* AppThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B84104A3DE834DBCC4E4B69 /* AppThemeTests.swift */; };
+		11717A65C9E688CFB5BA995C /* CompletedThingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A85F334D49A7D72195001 /* CompletedThingsView.swift */; };
+		157AC2C1ED4ACD99AFA44CB0 /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E86E2DCF66E5436EA83D84 /* SupabaseService.swift */; };
+		17F00B85FAC11AD4CF28D9F1 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1870E01158FBF3F453D5C3 /* Habit.swift */; };
+		1AF86E659610E0CA0C6E2C4F /* CompletedThingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A85F334D49A7D72195001 /* CompletedThingsView.swift */; };
 		1EAD63E6CE8ED907254427B3 /* HabitsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D7A39F1666A601E6A62157 /* HabitsWidget.swift */; };
+		22DA916352C1B2F30ECCECFE /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C04C7C8FEDE03DFC450DB7 /* HabitListView.swift */; };
+		231C76B193B3992495110929 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0422DDEB68DF2C4901907 /* AppTheme.swift */; };
 		26B08284671A90753CE24787 /* WidgetTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDC4FF4B21EA31B2551688 /* WidgetTheme.swift */; };
+		29AAB71F631517567E7F169A /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD300B5BA017D21BCC0AE6CF /* AppEnvironment.swift */; };
 		2F1A289A33E16B61AE289CAE /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2B973813333E595C187CB /* DateHelpers.swift */; };
+		30E6ABA0B5B705F07CC185EC /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2B973813333E595C187CB /* DateHelpers.swift */; };
+		31DF9D621CB9074BFE57B021 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F481D42307144F2A8AB5A028 /* GoogleSignInSwift */; };
 		3225ADE94F8152682CD140FE /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD300B5BA017D21BCC0AE6CF /* AppEnvironment.swift */; };
+		35FB926AA70109616BAC1469 /* MacHabitCommandModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D90F89FC74F6AF5EE4264A6 /* MacHabitCommandModel.swift */; };
 		36DCF1D79BE2B63546F40F1E /* HabitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5167AEDFC0EA5F485B4C0A /* HabitFormView.swift */; };
+		38FC500FB7D1599A32C6D426 /* Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2124372AF63ED7CDE100E9 /* Thing.swift */; };
+		3C5283AEE9902F3C4A0FC37F /* HabitWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BE0A0BB810CB6E1BC71AF /* HabitWidgetSnapshot.swift */; };
+		45AAD3F9DAE63D8F7255C3D5 /* HabitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D846F63BB28379DE20CB3B8 /* HabitRowView.swift */; };
+		47042C8AF5FD50B92DC78635 /* HabitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5167AEDFC0EA5F485B4C0A /* HabitFormView.swift */; };
+		4811398852E835BDDDFDF8CE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4574E7F3A159EDE83DE12 /* NotificationService.swift */; };
 		4EDB23EF6B195957DA56BABE /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164B84444655A74B6C1B54A1 /* SmallWidgetView.swift */; };
+		539EEFE961AD49FEC814F5C1 /* ThingFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D86DE22B40DCDE45A7C23D /* ThingFormView.swift */; };
+		53FCBEFB9E2C845C84398533 /* MacHabitCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B224C94F5F3C181C10A371C /* MacHabitCommands.swift */; };
+		5BCA09A27D2A2AFA2514F5B8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 371DA849E7E84A245CA9FE70 /* PrivacyInfo.xcprivacy */; };
+		5BF6EFC7FA44B79E5D4FEEC7 /* ThingSmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460F07EEB646E9462908090C /* ThingSmallWidgetView.swift */; };
+		5E0DE3428114AC61E6AAD31F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961372108BD532AB1A52A5B1 /* SettingsView.swift */; };
+		600E3A6533FB99E1819EA00B /* AddThingLockScreenWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297DDC35AB145B8BD41C4456 /* AddThingLockScreenWidget.swift */; };
+		63AE2793E08320A41855B81C /* HabitCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94C772063E5D51D9265EDB0 /* HabitCompletion.swift */; };
 		6BA7A56F79CBB95A020A02BC /* HabitListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAD217AAF97EE17698B346E /* HabitListViewModelTests.swift */; };
+		6EB01B419AC704790FCF8893 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961372108BD532AB1A52A5B1 /* SettingsView.swift */; };
+		6F114FC8D7A0463162A7C4FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36E5FCE9A1B8B9C878591887 /* Assets.xcassets */; };
+		6FF0B784F4CD1266D3478CD5 /* AppHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D79C8332FA252961B8F5D /* AppHaptics.swift */; };
+		70DA3F0A79F8C0FB21FE0348 /* ThingFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D86DE22B40DCDE45A7C23D /* ThingFormView.swift */; };
 		7135C507308AEF69A692C155 /* HabitsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A30013455D0A76FE93024DF /* HabitsApp.swift */; };
+		7174032789D3BC4413421819 /* ThingWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09999C91DDC0CA4B3938343B /* ThingWidgetSnapshot.swift */; };
+		742CCD815EF7FBF53C985413 /* MacHabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9D751A13AA85265F1DF34C /* MacHabitListView.swift */; };
+		752D983E88C868AA62C2DC8E /* Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2124372AF63ED7CDE100E9 /* Thing.swift */; };
 		76765ED976E9CDEE6378D330 /* HabitWidgetSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D44567C26654EE88C25F /* HabitWidgetSyncService.swift */; };
 		7730241465B19D7057B72072 /* HabitPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883AD445110E3812FBF780C /* HabitPersistenceTests.swift */; };
 		78CB8C8DC6E8C89F47B7CA56 /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C04C7C8FEDE03DFC450DB7 /* HabitListView.swift */; };
+		7A928333F89CE286D75B82CC /* HabitsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A30013455D0A76FE93024DF /* HabitsApp.swift */; };
+		81A84B570F5FA848C76DC8D2 /* SupabaseAccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118AA3EC23CE1EE3600E1F07 /* SupabaseAccountViewModelTests.swift */; };
+		8538950021FD8CEF6DD6CF58 /* ThingWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09999C91DDC0CA4B3938343B /* ThingWidgetSnapshot.swift */; };
 		85D2AB6E6D0A3A37B8AAD02B /* HabitListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB43D2C6428697F2044112E /* HabitListViewModel.swift */; };
+		896EFE816A809354921DA668 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 331BCC7642AE2628B8459E8B /* Preview Assets.xcassets */; };
 		8A5692289DBF24F5AB3B1F19 /* HabitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D846F63BB28379DE20CB3B8 /* HabitRowView.swift */; };
 		8B795D9F17EC7BDFE1BD8A12 /* WidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57FAD6A7D46B9A9FEFACA32 /* WidgetProvider.swift */; };
+		8E991111E229C41ADE59CF9E /* PlatformViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492819C7433F6B0822044910 /* PlatformViewModifiers.swift */; };
+		8EF4A4879486EB536524B884 /* MacHabitCommandModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D90F89FC74F6AF5EE4264A6 /* MacHabitCommandModel.swift */; };
+		90184E1F8B8B0EB9721BF000 /* ThingWidgetSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34349878B04DF58BABF9CE83 /* ThingWidgetSyncService.swift */; };
+		922E84B468D5C78A9E406B8D /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F107EF333D3C446AC0C5232 /* BackupService.swift */; };
 		923E4E3475A614CB6BF12CE1 /* ViewModelIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C135CAA3DA6957D7D0C73E5D /* ViewModelIntegrationTests.swift */; };
+		92810FFE24C91DED3EF6E50C /* HabitSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB0E63BA25EA266723135E /* HabitSchedule.swift */; };
+		973BA23712DC2EAC86C96A9E /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E973D0B10A7666241F44C18 /* SyncService.swift */; };
 		98F2F761057A1DCAD49C5B6F /* HabitCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94C772063E5D51D9265EDB0 /* HabitCompletion.swift */; };
 		99A03767A1D6C9FF1A3D249B /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1870E01158FBF3F453D5C3 /* Habit.swift */; };
+		99E6DD4905048FA6B9BD00B2 /* ThingWidgetSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34349878B04DF58BABF9CE83 /* ThingWidgetSyncService.swift */; };
+		9A3AB2B14F407CDBA8A5A45F /* MacHabitCommandModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B7289455BCFF85B194383F /* MacHabitCommandModelTests.swift */; };
+		9AAEBF4D2E6CA7D3AE56CE24 /* ThingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EAB5DBCC791482C53C563D /* ThingListViewModel.swift */; };
 		9CE8694C8F7E647DCF5FBB09 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0422DDEB68DF2C4901907 /* AppTheme.swift */; };
+		9E9DD9F9302167A5E52FD9BD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D10E55F71AD4199AB738DFAF /* GoogleSignInSwift */; };
+		9FD799914BD8D5E5750511AB /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056C86BCD740100B75FFAFB /* DeepLinkRouter.swift */; };
 		A11ADA584B05AE5A0A1CC569 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 331BCC7642AE2628B8459E8B /* Preview Assets.xcassets */; };
+		A4388EA5B223BEC52271BD6F /* ThingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CB539C6F3EC5004CEF48EB /* ThingRowView.swift */; };
+		A73370E74AB3D17CF1DE3394 /* ThingListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5BB42870F68C3F05E0E966 /* ThingListViewModelTests.swift */; };
+		A8A6D5F2E2C9457202930FED /* AppHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1D79C8332FA252961B8F5D /* AppHaptics.swift */; };
 		AA2E448FCF69B45A30F61390 /* DateHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB7B4A13F9ECFB71429A86 /* DateHelpersTests.swift */; };
 		AD217A5FE7DB9E47CF46BE66 /* NotificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD8764ABB595F5AC5686752 /* NotificationServiceTests.swift */; };
+		AECD4CD721AB2C4998A85F6B /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056C86BCD740100B75FFAFB /* DeepLinkRouter.swift */; };
 		B013AB68B65F7047E88004F2 /* HabitsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D40AECB2952E6AD323801D /* HabitsUITests.swift */; };
+		B487039F35565A63B5364EDC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 19D5E1F859D6A9342287C74E /* PrivacyInfo.xcprivacy */; };
+		B527097CCD3C1178EC0E3D95 /* ThingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CB539C6F3EC5004CEF48EB /* ThingRowView.swift */; };
 		BC5CC17FE4B4E4EC8D83FC0F /* HabitRowViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ABDDB8EA47A0E3E9E502FC /* HabitRowViewTests.swift */; };
 		BE6F4C556345D06F66912396 /* HabitModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D565E74ECED64289269FB18 /* HabitModelTests.swift */; };
+		BEB4AE66D0069487D19D88EB /* HabitWidgetSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D44567C26654EE88C25F /* HabitWidgetSyncService.swift */; };
+		C024FAF5FB149A82902C2780 /* MacHabitCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B224C94F5F3C181C10A371C /* MacHabitCommands.swift */; };
+		C54CC4B5C1B46E80B78263EC /* ThingModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AB2178ED87B39472F459A /* ThingModelTests.swift */; };
+		C601963112E9FD9EF9EFED1B /* DeepLinkRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D676DC5FA44E3F5254E1C /* DeepLinkRouterTests.swift */; };
+		C720DF9FD1E598D4E18E1352 /* PlatformViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492819C7433F6B0822044910 /* PlatformViewModifiers.swift */; };
+		C8C5FF5B0C0DD9729A99209C /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 71E8A2A2D09ACB483E558C05 /* Supabase */; };
+		CCF6B452B27BD53429DA42B1 /* SupabaseAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C7281A21BD89E57C2B8E59 /* SupabaseAccountViewModel.swift */; };
 		D94524CEA33935DA113341D3 /* HabitWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BE0A0BB810CB6E1BC71AF /* HabitWidgetSnapshot.swift */; };
+		DA127B467995C4742C458A58 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 19D5E1F859D6A9342287C74E /* PrivacyInfo.xcprivacy */; };
 		DA8888A7600040FF680C967F /* HabitsWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6BEB9E311C0A0C40D6ACA879 /* HabitsWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DB4BF7C8DD19528849E0DC12 /* HabitWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BE0A0BB810CB6E1BC71AF /* HabitWidgetSnapshot.swift */; };
 		DE3E68974F1208964EB8820E /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4574E7F3A159EDE83DE12 /* NotificationService.swift */; };
 		DE83B0C63F096E06883E5ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36E5FCE9A1B8B9C878591887 /* Assets.xcassets */; };
+		E0EDA1DDEF6565C9A3BED49D /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E973D0B10A7666241F44C18 /* SyncService.swift */; };
+		E2FDFE9BA3A479770EF6C149 /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F107EF333D3C446AC0C5232 /* BackupService.swift */; };
+		E42E302D94E3D504C0E912FD /* HabitListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB43D2C6428697F2044112E /* HabitListViewModel.swift */; };
 		E8F6AD9C71EB196E2D845C50 /* HabitSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB0E63BA25EA266723135E /* HabitSchedule.swift */; };
 		EDB5237B0FCA922A5D7D0CF1 /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B03E8BE6AD5F596B7D24F3 /* MediumWidgetView.swift */; };
+		EE4CAEC96DCC7FD6B2446D2D /* ThingWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09999C91DDC0CA4B3938343B /* ThingWidgetSnapshot.swift */; };
+		F059D3480D0DEF7E2B6D694F /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E97F276AA2229BD5F0EA9B52 /* GoogleSignIn */; };
+		F256458C44FAC14F37BD8557 /* ThingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EAB5DBCC791482C53C563D /* ThingListViewModel.swift */; };
+		F33E592DCA9020DED9604B09 /* ThingWidgetSyncServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E62870E5FDF2DE8E37C6C37 /* ThingWidgetSyncServiceTests.swift */; };
+		F40E768765571CDEE143200B /* ThingPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889773884649B635CF4F9A3A /* ThingPersistenceTests.swift */; };
+		F5E1AF8DAFC93624E7BDA6EC /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E86E2DCF66E5436EA83D84 /* SupabaseService.swift */; };
+		F712133C21DE6DEBA8ECF3DE /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9777772DA81F94D6B9138640 /* Supabase */; };
+		F91A70C7B5924C59CC672BC8 /* ThingWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B7E56AF27EF6360261011D /* ThingWidgetProvider.swift */; };
+		FD4DB382BC7954615CCCCA2F /* BackupServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE42B932CA6E872B02BF03 /* BackupServiceTests.swift */; };
+		FEE693B853E0E2D181CD7D38 /* SupabaseAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C7281A21BD89E57C2B8E59 /* SupabaseAccountViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +132,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A061B0D7E971C33B88601833;
 			remoteInfo = HabitsWidgetExtension;
+		};
+		81E1B8B6043F898D76B920DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 378E62ACFE4CF42B3A18D134 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDDF77191FF0DAAFCA0D960C;
+			remoteInfo = HabitsMac;
 		};
 		F228987DA15F10EDD88F6804 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -83,51 +165,112 @@
 
 /* Begin PBXFileReference section */
 		0883AD445110E3812FBF780C /* HabitPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitPersistenceTests.swift; sourceTree = "<group>"; };
+		09999C91DDC0CA4B3938343B /* ThingWidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingWidgetSnapshot.swift; sourceTree = "<group>"; };
+		0A5BB42870F68C3F05E0E966 /* ThingListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingListViewModelTests.swift; sourceTree = "<group>"; };
+		118AA3EC23CE1EE3600E1F07 /* SupabaseAccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAccountViewModelTests.swift; sourceTree = "<group>"; };
+		13B7289455BCFF85B194383F /* MacHabitCommandModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHabitCommandModelTests.swift; sourceTree = "<group>"; };
 		164B84444655A74B6C1B54A1 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
+		19D5E1F859D6A9342287C74E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1D565E74ECED64289269FB18 /* HabitModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitModelTests.swift; sourceTree = "<group>"; };
 		1DB43D2C6428697F2044112E /* HabitListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListViewModel.swift; sourceTree = "<group>"; };
+		23B7E56AF27EF6360261011D /* ThingWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingWidgetProvider.swift; sourceTree = "<group>"; };
+		297DDC35AB145B8BD41C4456 /* AddThingLockScreenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThingLockScreenWidget.swift; sourceTree = "<group>"; };
 		2AAD217AAF97EE17698B346E /* HabitListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListViewModelTests.swift; sourceTree = "<group>"; };
 		2DD8764ABB595F5AC5686752 /* NotificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceTests.swift; sourceTree = "<group>"; };
+		2E2124372AF63ED7CDE100E9 /* Thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thing.swift; sourceTree = "<group>"; };
+		2E973D0B10A7666241F44C18 /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
+		2F107EF333D3C446AC0C5232 /* BackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupService.swift; sourceTree = "<group>"; };
 		331BCC7642AE2628B8459E8B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		34349878B04DF58BABF9CE83 /* ThingWidgetSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingWidgetSyncService.swift; sourceTree = "<group>"; };
 		36E5FCE9A1B8B9C878591887 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3714A90023422EADF05CCA3D /* HabitsMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitsMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		371DA849E7E84A245CA9FE70 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		37DAB1BAA123907DEC577EFF /* HabitsUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HabitsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D846F63BB28379DE20CB3B8 /* HabitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRowView.swift; sourceTree = "<group>"; };
+		3D90F89FC74F6AF5EE4264A6 /* MacHabitCommandModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHabitCommandModel.swift; sourceTree = "<group>"; };
+		460F07EEB646E9462908090C /* ThingSmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingSmallWidgetView.swift; sourceTree = "<group>"; };
+		46D86DE22B40DCDE45A7C23D /* ThingFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingFormView.swift; sourceTree = "<group>"; };
+		492819C7433F6B0822044910 /* PlatformViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformViewModifiers.swift; sourceTree = "<group>"; };
 		4A30013455D0A76FE93024DF /* HabitsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsApp.swift; sourceTree = "<group>"; };
+		4A4A85F334D49A7D72195001 /* CompletedThingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedThingsView.swift; sourceTree = "<group>"; };
 		52ABDDB8EA47A0E3E9E502FC /* HabitRowViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRowViewTests.swift; sourceTree = "<group>"; };
 		579FA5520D9244F391810F92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5C3568E14985422505BFA658 /* HabitsTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HabitsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AB0E63BA25EA266723135E /* HabitSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSchedule.swift; sourceTree = "<group>"; };
 		67A3D44567C26654EE88C25F /* HabitWidgetSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetSyncService.swift; sourceTree = "<group>"; };
 		6BEB9E311C0A0C40D6ACA879 /* HabitsWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = HabitsWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		71EAB5DBCC791482C53C563D /* ThingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingListViewModel.swift; sourceTree = "<group>"; };
 		72B5DA6835ED754CE17A6319 /* Habits.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Habits.entitlements; sourceTree = "<group>"; };
 		73C0422DDEB68DF2C4901907 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		75E90377FC764903DAA998CF /* LockScreenWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenWidgetView.swift; sourceTree = "<group>"; };
+		781063FB6B7A402CFD8AD16A /* AppHapticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHapticsTests.swift; sourceTree = "<group>"; };
+		7B6AB2178ED87B39472F459A /* ThingModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingModelTests.swift; sourceTree = "<group>"; };
 		7E36ACE58ADDED4F687E80AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7F9D751A13AA85265F1DF34C /* MacHabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHabitListView.swift; sourceTree = "<group>"; };
+		888D676DC5FA44E3F5254E1C /* DeepLinkRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRouterTests.swift; sourceTree = "<group>"; };
+		889773884649B635CF4F9A3A /* ThingPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingPersistenceTests.swift; sourceTree = "<group>"; };
 		89D7A39F1666A601E6A62157 /* HabitsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsWidget.swift; sourceTree = "<group>"; };
 		8A5167AEDFC0EA5F485B4C0A /* HabitFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFormView.swift; sourceTree = "<group>"; };
+		8B224C94F5F3C181C10A371C /* MacHabitCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHabitCommands.swift; sourceTree = "<group>"; };
 		8B84104A3DE834DBCC4E4B69 /* AppThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeTests.swift; sourceTree = "<group>"; };
+		8C1D79C8332FA252961B8F5D /* AppHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHaptics.swift; sourceTree = "<group>"; };
+		961372108BD532AB1A52A5B1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		96CB7B4A13F9ECFB71429A86 /* DateHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpersTests.swift; sourceTree = "<group>"; };
+		98E86E2DCF66E5436EA83D84 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
+		9E62870E5FDF2DE8E37C6C37 /* ThingWidgetSyncServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingWidgetSyncServiceTests.swift; sourceTree = "<group>"; };
+		A2CB539C6F3EC5004CEF48EB /* ThingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingRowView.swift; sourceTree = "<group>"; };
+		B0C7281A21BD89E57C2B8E59 /* SupabaseAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAccountViewModel.swift; sourceTree = "<group>"; };
 		B94C772063E5D51D9265EDB0 /* HabitCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCompletion.swift; sourceTree = "<group>"; };
 		BAA4574E7F3A159EDE83DE12 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		C135CAA3DA6957D7D0C73E5D /* ViewModelIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelIntegrationTests.swift; sourceTree = "<group>"; };
 		CB71FC683723B421A43C92AD /* Habits.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Habits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF1870E01158FBF3F453D5C3 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		D056C86BCD740100B75FFAFB /* DeepLinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRouter.swift; sourceTree = "<group>"; };
 		D1EDC4FF4B21EA31B2551688 /* WidgetTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTheme.swift; sourceTree = "<group>"; };
 		D80BE0A0BB810CB6E1BC71AF /* HabitWidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetSnapshot.swift; sourceTree = "<group>"; };
 		D8B03E8BE6AD5F596B7D24F3 /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
+		DEDE42B932CA6E872B02BF03 /* BackupServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupServiceTests.swift; sourceTree = "<group>"; };
 		DF619F68357D3E3E6E6235AB /* HabitsWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitsWidgetExtension.entitlements; sourceTree = "<group>"; };
 		E0C04C7C8FEDE03DFC450DB7 /* HabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListView.swift; sourceTree = "<group>"; };
+		E235095C98F2EDE25FFC1B08 /* SupabaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseServiceTests.swift; sourceTree = "<group>"; };
+		F29745AE136D528B7A60C5EC /* HabitsMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitsMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D40AECB2952E6AD323801D /* HabitsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsUITests.swift; sourceTree = "<group>"; };
 		F4A2B973813333E595C187CB /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		F57FAD6A7D46B9A9FEFACA32 /* WidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetProvider.swift; sourceTree = "<group>"; };
 		FD300B5BA017D21BCC0AE6CF /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		3865CECCC32E4E7E0AEBC797 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F712133C21DE6DEBA8ECF3DE /* Supabase in Frameworks */,
+				00AD4015D3A4E1302015B13A /* GoogleSignIn in Frameworks */,
+				31DF9D621CB9074BFE57B021 /* GoogleSignInSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49201FC4FFCF78B0772CCD7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8C5FF5B0C0DD9729A99209C /* Supabase in Frameworks */,
+				F059D3480D0DEF7E2B6D694F /* GoogleSignIn in Frameworks */,
+				9E9DD9F9302167A5E52FD9BD /* GoogleSignInSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		0950EEBEC41D2CCC0A1185F8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				1DB43D2C6428697F2044112E /* HabitListViewModel.swift */,
+				3D90F89FC74F6AF5EE4264A6 /* MacHabitCommandModel.swift */,
+				B0C7281A21BD89E57C2B8E59 /* SupabaseAccountViewModel.swift */,
+				71EAB5DBCC791482C53C563D /* ThingListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -137,8 +280,17 @@
 			children = (
 				65AB0E63BA25EA266723135E /* HabitSchedule.swift */,
 				D80BE0A0BB810CB6E1BC71AF /* HabitWidgetSnapshot.swift */,
+				09999C91DDC0CA4B3938343B /* ThingWidgetSnapshot.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		301ACE8E67638AB4D95D19F4 /* HabitsMacTests */ = {
+			isa = PBXGroup;
+			children = (
+				13B7289455BCFF85B194383F /* MacHabitCommandModelTests.swift */,
+			);
+			path = HabitsMacTests;
 			sourceTree = "<group>";
 		};
 		37A15F2C085309472750F48C /* Preview Content */ = {
@@ -162,6 +314,7 @@
 			children = (
 				CF1870E01158FBF3F453D5C3 /* Habit.swift */,
 				B94C772063E5D51D9265EDB0 /* HabitCompletion.swift */,
+				2E2124372AF63ED7CDE100E9 /* Thing.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -169,12 +322,16 @@
 		61274848EF03E3D33A85ABFE /* HabitsWidget */ = {
 			isa = PBXGroup;
 			children = (
+				297DDC35AB145B8BD41C4456 /* AddThingLockScreenWidget.swift */,
 				89D7A39F1666A601E6A62157 /* HabitsWidget.swift */,
 				DF619F68357D3E3E6E6235AB /* HabitsWidgetExtension.entitlements */,
 				579FA5520D9244F391810F92 /* Info.plist */,
 				75E90377FC764903DAA998CF /* LockScreenWidgetView.swift */,
 				D8B03E8BE6AD5F596B7D24F3 /* MediumWidgetView.swift */,
+				371DA849E7E84A245CA9FE70 /* PrivacyInfo.xcprivacy */,
 				164B84444655A74B6C1B54A1 /* SmallWidgetView.swift */,
+				460F07EEB646E9462908090C /* ThingSmallWidgetView.swift */,
+				23B7E56AF27EF6360261011D /* ThingWidgetProvider.swift */,
 				F57FAD6A7D46B9A9FEFACA32 /* WidgetProvider.swift */,
 				D1EDC4FF4B21EA31B2551688 /* WidgetTheme.swift */,
 			);
@@ -185,6 +342,8 @@
 			isa = PBXGroup;
 			children = (
 				CB71FC683723B421A43C92AD /* Habits.app */,
+				3714A90023422EADF05CCA3D /* HabitsMac.app */,
+				F29745AE136D528B7A60C5EC /* HabitsMacTests.xctest */,
 				5C3568E14985422505BFA658 /* HabitsTests.xctest */,
 				37DAB1BAA123907DEC577EFF /* HabitsUITests.xctest */,
 				6BEB9E311C0A0C40D6ACA879 /* HabitsWidgetExtension.appex */,
@@ -196,8 +355,11 @@
 			isa = PBXGroup;
 			children = (
 				FD300B5BA017D21BCC0AE6CF /* AppEnvironment.swift */,
+				8C1D79C8332FA252961B8F5D /* AppHaptics.swift */,
 				73C0422DDEB68DF2C4901907 /* AppTheme.swift */,
 				F4A2B973813333E595C187CB /* DateHelpers.swift */,
+				D056C86BCD740100B75FFAFB /* DeepLinkRouter.swift */,
+				492819C7433F6B0822044910 /* PlatformViewModifiers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -205,9 +367,15 @@
 		8C178C6F0B1CE5C472388B0D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4A4A85F334D49A7D72195001 /* CompletedThingsView.swift */,
 				8A5167AEDFC0EA5F485B4C0A /* HabitFormView.swift */,
 				E0C04C7C8FEDE03DFC450DB7 /* HabitListView.swift */,
 				3D846F63BB28379DE20CB3B8 /* HabitRowView.swift */,
+				8B224C94F5F3C181C10A371C /* MacHabitCommands.swift */,
+				7F9D751A13AA85265F1DF34C /* MacHabitListView.swift */,
+				961372108BD532AB1A52A5B1 /* SettingsView.swift */,
+				46D86DE22B40DCDE45A7C23D /* ThingFormView.swift */,
+				A2CB539C6F3EC5004CEF48EB /* ThingRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +387,7 @@
 				72B5DA6835ED754CE17A6319 /* Habits.entitlements */,
 				4A30013455D0A76FE93024DF /* HabitsApp.swift */,
 				7E36ACE58ADDED4F687E80AE /* Info.plist */,
+				19D5E1F859D6A9342287C74E /* PrivacyInfo.xcprivacy */,
 				53B819B801989F003BBADA34 /* Models */,
 				37A15F2C085309472750F48C /* Preview Content */,
 				C2F65F082654772369ADBD21 /* Services */,
@@ -233,8 +402,12 @@
 		C2F65F082654772369ADBD21 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2F107EF333D3C446AC0C5232 /* BackupService.swift */,
 				67A3D44567C26654EE88C25F /* HabitWidgetSyncService.swift */,
 				BAA4574E7F3A159EDE83DE12 /* NotificationService.swift */,
+				98E86E2DCF66E5436EA83D84 /* SupabaseService.swift */,
+				2E973D0B10A7666241F44C18 /* SyncService.swift */,
+				34349878B04DF58BABF9CE83 /* ThingWidgetSyncService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -242,13 +415,22 @@
 		DE66E2E2DF241E6FDD68303D /* HabitsTests */ = {
 			isa = PBXGroup;
 			children = (
+				781063FB6B7A402CFD8AD16A /* AppHapticsTests.swift */,
 				8B84104A3DE834DBCC4E4B69 /* AppThemeTests.swift */,
+				DEDE42B932CA6E872B02BF03 /* BackupServiceTests.swift */,
 				96CB7B4A13F9ECFB71429A86 /* DateHelpersTests.swift */,
+				888D676DC5FA44E3F5254E1C /* DeepLinkRouterTests.swift */,
 				2AAD217AAF97EE17698B346E /* HabitListViewModelTests.swift */,
 				1D565E74ECED64289269FB18 /* HabitModelTests.swift */,
 				0883AD445110E3812FBF780C /* HabitPersistenceTests.swift */,
 				52ABDDB8EA47A0E3E9E502FC /* HabitRowViewTests.swift */,
 				2DD8764ABB595F5AC5686752 /* NotificationServiceTests.swift */,
+				118AA3EC23CE1EE3600E1F07 /* SupabaseAccountViewModelTests.swift */,
+				E235095C98F2EDE25FFC1B08 /* SupabaseServiceTests.swift */,
+				0A5BB42870F68C3F05E0E966 /* ThingListViewModelTests.swift */,
+				7B6AB2178ED87B39472F459A /* ThingModelTests.swift */,
+				889773884649B635CF4F9A3A /* ThingPersistenceTests.swift */,
+				9E62870E5FDF2DE8E37C6C37 /* ThingWidgetSyncServiceTests.swift */,
 				C135CAA3DA6957D7D0C73E5D /* ViewModelIntegrationTests.swift */,
 			);
 			path = HabitsTests;
@@ -258,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				B8AEC72A8478939505AE9322 /* Habits */,
+				301ACE8E67638AB4D95D19F4 /* HabitsMacTests */,
 				DE66E2E2DF241E6FDD68303D /* HabitsTests */,
 				48707707B1EF626FF8EE4DF1 /* HabitsUITests */,
 				61274848EF03E3D33A85ABFE /* HabitsWidget */,
@@ -292,6 +475,7 @@
 			buildPhases = (
 				6C7EBF235A7C89D6AB679B52 /* Sources */,
 				2B081F6259EDDB1986C4AC79 /* Resources */,
+				3865CECCC32E4E7E0AEBC797 /* Frameworks */,
 				6AFA04CEBD45D02388F21E8E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -301,6 +485,9 @@
 			);
 			name = Habits;
 			packageProductDependencies = (
+				9777772DA81F94D6B9138640 /* Supabase */,
+				EAF2DE7B1C05B526B34E0727 /* GoogleSignIn */,
+				F481D42307144F2A8AB5A028 /* GoogleSignInSwift */,
 			);
 			productName = Habits;
 			productReference = CB71FC683723B421A43C92AD /* Habits.app */;
@@ -311,6 +498,7 @@
 			buildConfigurationList = FF3679E58F705C18DE1E513A /* Build configuration list for PBXNativeTarget "HabitsWidgetExtension" */;
 			buildPhases = (
 				66E4D12FB07A173F36044BE7 /* Sources */,
+				A10A23C9ACFE0579FE0B1EF7 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -341,6 +529,46 @@
 			productReference = 37DAB1BAA123907DEC577EFF /* HabitsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		DDDF77191FF0DAAFCA0D960C /* HabitsMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A563F3EA0EC0C8BB305BE791 /* Build configuration list for PBXNativeTarget "HabitsMac" */;
+			buildPhases = (
+				6D0B8123E9839F59B08C3A96 /* Sources */,
+				BBE65F42F608EA22B1FAA4CD /* Resources */,
+				49201FC4FFCF78B0772CCD7E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HabitsMac;
+			packageProductDependencies = (
+				71E8A2A2D09ACB483E558C05 /* Supabase */,
+				E97F276AA2229BD5F0EA9B52 /* GoogleSignIn */,
+				D10E55F71AD4199AB738DFAF /* GoogleSignInSwift */,
+			);
+			productName = HabitsMac;
+			productReference = 3714A90023422EADF05CCA3D /* HabitsMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF2D041804211BB5C7B5DCED /* HabitsMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A6DC936E94FB53A3F4C7AEF /* Build configuration list for PBXNativeTarget "HabitsMacTests" */;
+			buildPhases = (
+				6F8218F5C356A4FF92CEAECA /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FD2005095AB53795E7527CB2 /* PBXTargetDependency */,
+			);
+			name = HabitsMacTests;
+			packageProductDependencies = (
+			);
+			productName = HabitsMacTests;
+			productReference = F29745AE136D528B7A60C5EC /* HabitsMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -363,6 +591,12 @@
 						DevelopmentTeam = YH4QJW8XNH;
 						TestTargetID = 4F61129BB39F0B5F97F0BC76;
 					};
+					DDDF77191FF0DAAFCA0D960C = {
+						DevelopmentTeam = YH4QJW8XNH;
+					};
+					EF2D041804211BB5C7B5DCED = {
+						DevelopmentTeam = YH4QJW8XNH;
+					};
 				};
 			};
 			buildConfigurationList = 7A38DF3C3C0B75EA27E50D4F /* Build configuration list for PBXProject "Habits" */;
@@ -374,12 +608,18 @@
 			);
 			mainGroup = FB3988B3383050F3DEAF995D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				069734EC8D7E6693D2857933 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				5789C10BFECFF699392FCAFB /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7876C4864BA47B0FC71C8901 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				4F61129BB39F0B5F97F0BC76 /* Habits */,
+				DDDF77191FF0DAAFCA0D960C /* HabitsMac */,
+				EF2D041804211BB5C7B5DCED /* HabitsMacTests */,
 				3BBA5F4E40488C6B715135FC /* HabitsTests */,
 				A57D2352A0A398016FA094F3 /* HabitsUITests */,
 				A061B0D7E971C33B88601833 /* HabitsWidgetExtension */,
@@ -394,6 +634,25 @@
 			files = (
 				DE83B0C63F096E06883E5ABE /* Assets.xcassets in Resources */,
 				A11ADA584B05AE5A0A1CC569 /* Preview Assets.xcassets in Resources */,
+				B487039F35565A63B5364EDC /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10A23C9ACFE0579FE0B1EF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BCA09A27D2A2AFA2514F5B8 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBE65F42F608EA22B1FAA4CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F114FC8D7A0463162A7C4FE /* Assets.xcassets in Resources */,
+				896EFE816A809354921DA668 /* Preview Assets.xcassets in Resources */,
+				DA127B467995C4742C458A58 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,13 +663,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				093A0B164BF98E5E86A6F8A2 /* AppHapticsTests.swift in Sources */,
 				10414DA2F2C8A305F22E2099 /* AppThemeTests.swift in Sources */,
+				FD4DB382BC7954615CCCCA2F /* BackupServiceTests.swift in Sources */,
 				AA2E448FCF69B45A30F61390 /* DateHelpersTests.swift in Sources */,
+				C601963112E9FD9EF9EFED1B /* DeepLinkRouterTests.swift in Sources */,
 				6BA7A56F79CBB95A020A02BC /* HabitListViewModelTests.swift in Sources */,
 				BE6F4C556345D06F66912396 /* HabitModelTests.swift in Sources */,
 				7730241465B19D7057B72072 /* HabitPersistenceTests.swift in Sources */,
 				BC5CC17FE4B4E4EC8D83FC0F /* HabitRowViewTests.swift in Sources */,
 				AD217A5FE7DB9E47CF46BE66 /* NotificationServiceTests.swift in Sources */,
+				81A84B570F5FA848C76DC8D2 /* SupabaseAccountViewModelTests.swift in Sources */,
+				0CFD521C54E2003CEF30FE4A /* SupabaseServiceTests.swift in Sources */,
+				A73370E74AB3D17CF1DE3394 /* ThingListViewModelTests.swift in Sources */,
+				C54CC4B5C1B46E80B78263EC /* ThingModelTests.swift in Sources */,
+				F40E768765571CDEE143200B /* ThingPersistenceTests.swift in Sources */,
+				F33E592DCA9020DED9604B09 /* ThingWidgetSyncServiceTests.swift in Sources */,
 				923E4E3475A614CB6BF12CE1 /* ViewModelIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,12 +695,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				600E3A6533FB99E1819EA00B /* AddThingLockScreenWidget.swift in Sources */,
 				E8F6AD9C71EB196E2D845C50 /* HabitSchedule.swift in Sources */,
 				D94524CEA33935DA113341D3 /* HabitWidgetSnapshot.swift in Sources */,
 				1EAD63E6CE8ED907254427B3 /* HabitsWidget.swift in Sources */,
 				0BFDED9DACF42BCD2B3E56D1 /* LockScreenWidgetView.swift in Sources */,
 				EDB5237B0FCA922A5D7D0CF1 /* MediumWidgetView.swift in Sources */,
 				4EDB23EF6B195957DA56BABE /* SmallWidgetView.swift in Sources */,
+				5BF6EFC7FA44B79E5D4FEEC7 /* ThingSmallWidgetView.swift in Sources */,
+				F91A70C7B5924C59CC672BC8 /* ThingWidgetProvider.swift in Sources */,
+				EE4CAEC96DCC7FD6B2446D2D /* ThingWidgetSnapshot.swift in Sources */,
 				8B795D9F17EC7BDFE1BD8A12 /* WidgetProvider.swift in Sources */,
 				26B08284671A90753CE24787 /* WidgetTheme.swift in Sources */,
 			);
@@ -443,8 +715,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3225ADE94F8152682CD140FE /* AppEnvironment.swift in Sources */,
+				6FF0B784F4CD1266D3478CD5 /* AppHaptics.swift in Sources */,
 				9CE8694C8F7E647DCF5FBB09 /* AppTheme.swift in Sources */,
+				922E84B468D5C78A9E406B8D /* BackupService.swift in Sources */,
+				11717A65C9E688CFB5BA995C /* CompletedThingsView.swift in Sources */,
 				2F1A289A33E16B61AE289CAE /* DateHelpers.swift in Sources */,
+				AECD4CD721AB2C4998A85F6B /* DeepLinkRouter.swift in Sources */,
 				99A03767A1D6C9FF1A3D249B /* Habit.swift in Sources */,
 				98F2F761057A1DCAD49C5B6F /* HabitCompletion.swift in Sources */,
 				36DCF1D79BE2B63546F40F1E /* HabitFormView.swift in Sources */,
@@ -455,7 +731,68 @@
 				DB4BF7C8DD19528849E0DC12 /* HabitWidgetSnapshot.swift in Sources */,
 				76765ED976E9CDEE6378D330 /* HabitWidgetSyncService.swift in Sources */,
 				7135C507308AEF69A692C155 /* HabitsApp.swift in Sources */,
+				35FB926AA70109616BAC1469 /* MacHabitCommandModel.swift in Sources */,
+				53FCBEFB9E2C845C84398533 /* MacHabitCommands.swift in Sources */,
+				0F9A2675A83021BE6E534210 /* MacHabitListView.swift in Sources */,
 				DE3E68974F1208964EB8820E /* NotificationService.swift in Sources */,
+				C720DF9FD1E598D4E18E1352 /* PlatformViewModifiers.swift in Sources */,
+				6EB01B419AC704790FCF8893 /* SettingsView.swift in Sources */,
+				FEE693B853E0E2D181CD7D38 /* SupabaseAccountViewModel.swift in Sources */,
+				157AC2C1ED4ACD99AFA44CB0 /* SupabaseService.swift in Sources */,
+				973BA23712DC2EAC86C96A9E /* SyncService.swift in Sources */,
+				752D983E88C868AA62C2DC8E /* Thing.swift in Sources */,
+				70DA3F0A79F8C0FB21FE0348 /* ThingFormView.swift in Sources */,
+				9AAEBF4D2E6CA7D3AE56CE24 /* ThingListViewModel.swift in Sources */,
+				B527097CCD3C1178EC0E3D95 /* ThingRowView.swift in Sources */,
+				7174032789D3BC4413421819 /* ThingWidgetSnapshot.swift in Sources */,
+				90184E1F8B8B0EB9721BF000 /* ThingWidgetSyncService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D0B8123E9839F59B08C3A96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29AAB71F631517567E7F169A /* AppEnvironment.swift in Sources */,
+				A8A6D5F2E2C9457202930FED /* AppHaptics.swift in Sources */,
+				231C76B193B3992495110929 /* AppTheme.swift in Sources */,
+				E2FDFE9BA3A479770EF6C149 /* BackupService.swift in Sources */,
+				1AF86E659610E0CA0C6E2C4F /* CompletedThingsView.swift in Sources */,
+				30E6ABA0B5B705F07CC185EC /* DateHelpers.swift in Sources */,
+				9FD799914BD8D5E5750511AB /* DeepLinkRouter.swift in Sources */,
+				17F00B85FAC11AD4CF28D9F1 /* Habit.swift in Sources */,
+				63AE2793E08320A41855B81C /* HabitCompletion.swift in Sources */,
+				47042C8AF5FD50B92DC78635 /* HabitFormView.swift in Sources */,
+				22DA916352C1B2F30ECCECFE /* HabitListView.swift in Sources */,
+				E42E302D94E3D504C0E912FD /* HabitListViewModel.swift in Sources */,
+				45AAD3F9DAE63D8F7255C3D5 /* HabitRowView.swift in Sources */,
+				92810FFE24C91DED3EF6E50C /* HabitSchedule.swift in Sources */,
+				3C5283AEE9902F3C4A0FC37F /* HabitWidgetSnapshot.swift in Sources */,
+				BEB4AE66D0069487D19D88EB /* HabitWidgetSyncService.swift in Sources */,
+				7A928333F89CE286D75B82CC /* HabitsApp.swift in Sources */,
+				8EF4A4879486EB536524B884 /* MacHabitCommandModel.swift in Sources */,
+				C024FAF5FB149A82902C2780 /* MacHabitCommands.swift in Sources */,
+				742CCD815EF7FBF53C985413 /* MacHabitListView.swift in Sources */,
+				4811398852E835BDDDFDF8CE /* NotificationService.swift in Sources */,
+				8E991111E229C41ADE59CF9E /* PlatformViewModifiers.swift in Sources */,
+				5E0DE3428114AC61E6AAD31F /* SettingsView.swift in Sources */,
+				CCF6B452B27BD53429DA42B1 /* SupabaseAccountViewModel.swift in Sources */,
+				F5E1AF8DAFC93624E7BDA6EC /* SupabaseService.swift in Sources */,
+				E0EDA1DDEF6565C9A3BED49D /* SyncService.swift in Sources */,
+				38FC500FB7D1599A32C6D426 /* Thing.swift in Sources */,
+				539EEFE961AD49FEC814F5C1 /* ThingFormView.swift in Sources */,
+				F256458C44FAC14F37BD8557 /* ThingListViewModel.swift in Sources */,
+				A4388EA5B223BEC52271BD6F /* ThingRowView.swift in Sources */,
+				8538950021FD8CEF6DD6CF58 /* ThingWidgetSnapshot.swift in Sources */,
+				99E6DD4905048FA6B9BD00B2 /* ThingWidgetSyncService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F8218F5C356A4FF92CEAECA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A3AB2B14F407CDBA8A5A45F /* MacHabitCommandModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +813,11 @@
 			isa = PBXTargetDependency;
 			target = A061B0D7E971C33B88601833 /* HabitsWidgetExtension */;
 			targetProxy = 78A15FE184C3D79CB635B4A9 /* PBXContainerItemProxy */;
+		};
+		FD2005095AB53795E7527CB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDDF77191FF0DAAFCA0D960C /* HabitsMac */;
+			targetProxy = 81E1B8B6043F898D76B920DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -533,6 +875,23 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Habits;
+			};
+			name = Release;
+		};
+		49B08BA3C9A6E40BD8FC6C19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.albertc.habit.mac.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habits.app/Contents/MacOS/Habits";
 			};
 			name = Release;
 		};
@@ -594,6 +953,23 @@
 			};
 			name = Debug;
 		};
+		97E5FA45D14E0C1BF31674F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.albertc.habit.mac.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habits.app/Contents/MacOS/Habits";
+			};
+			name = Debug;
+		};
 		9AFEE9173C83D1584A12EF55 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -648,12 +1024,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
@@ -727,16 +1103,58 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
+		};
+		B9240F8816763431FA797046 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HabitsMac/HabitsMac.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = HabitsMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.albertc.habit.mac;
+				PRODUCT_NAME = "Habits & Things";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		CD914D57FD83EDFE4D11C6E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HabitsMac/HabitsMac.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = HabitsMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.albertc.habit.mac;
+				PRODUCT_NAME = "Habits & Things";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
 		};
 		CDC1411EDD143EEE5F1C4978 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -785,6 +1203,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
+		9A6DC936E94FB53A3F4C7AEF /* Build configuration list for PBXNativeTarget "HabitsMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97E5FA45D14E0C1BF31674F1 /* Debug */,
+				49B08BA3C9A6E40BD8FC6C19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A563F3EA0EC0C8BB305BE791 /* Build configuration list for PBXNativeTarget "HabitsMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD914D57FD83EDFE4D11C6E1 /* Debug */,
+				B9240F8816763431FA797046 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		B927E13EDFE6FEE6E8345D97 /* Build configuration list for PBXNativeTarget "HabitsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -804,6 +1240,58 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		069734EC8D7E6693D2857933 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = exactVersion;
+				version = 9.1.0;
+			};
+		};
+		5789C10BFECFF699392FCAFB /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.45.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		71E8A2A2D09ACB483E558C05 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5789C10BFECFF699392FCAFB /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+		9777772DA81F94D6B9138640 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5789C10BFECFF699392FCAFB /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+		D10E55F71AD4199AB738DFAF /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 069734EC8D7E6693D2857933 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		E97F276AA2229BD5F0EA9B52 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 069734EC8D7E6693D2857933 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		EAF2DE7B1C05B526B34E0727 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 069734EC8D7E6693D2857933 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		F481D42307144F2A8AB5A028 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 069734EC8D7E6693D2857933 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 378E62ACFE4CF42B3A18D134 /* Project object */;
 }

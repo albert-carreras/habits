@@ -25,43 +25,55 @@ struct SmallWidgetView: View {
     let entry: HabitWidgetEntry
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 6) {
+                Image(systemName: "leaf.fill")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(WidgetTheme.accent(for: colorScheme))
+
+                Text(entry.habitName)
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(WidgetTheme.accent(for: colorScheme))
+                    .textCase(.uppercase)
+                    .lineLimit(1)
+            }
+
+            Spacer(minLength: 0)
+
             ZStack {
                 Circle()
-                    .stroke(WidgetTheme.border(for: colorScheme), lineWidth: 4)
-                    .frame(width: 50, height: 50)
+                    .stroke(WidgetTheme.border(for: colorScheme), lineWidth: 5)
+                    .frame(width: 64, height: 64)
 
                 if !entry.isDueToday {
                     Text("OFF")
-                        .font(.system(size: 11, weight: .bold))
+                        .font(.system(size: 12, weight: .bold))
                         .foregroundStyle(WidgetTheme.muted(for: colorScheme))
                 } else if entry.timesToComplete == 1 {
-                    Image(systemName: entry.isCompleted ? "checkmark.circle.fill" : "circle")
-                        .font(.system(size: 44))
-                        .foregroundStyle(entry.isCompleted ? WidgetTheme.accent(for: colorScheme) : WidgetTheme.muted(for: colorScheme))
+                    Image(systemName: entry.isCompleted ? "checkmark" : "")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundStyle(WidgetTheme.accent(for: colorScheme))
                 } else {
                     Circle()
                         .trim(from: 0, to: progress)
-                        .stroke(WidgetTheme.accent(for: colorScheme), style: StrokeStyle(lineWidth: 4, lineCap: .round))
-                        .frame(width: 50, height: 50)
+                        .stroke(WidgetTheme.accent(for: colorScheme), style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                        .frame(width: 64, height: 64)
                         .rotationEffect(.degrees(-90))
 
                     Text("\(entry.completionCount)")
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.system(size: 18, weight: .bold))
                         .monospacedDigit()
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .center)
 
-            Text(entry.habitName)
-                .font(.system(size: 13, weight: .medium))
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
+            Spacer(minLength: 0)
 
             Text(statusText)
-                .font(.system(size: 11, weight: .semibold))
+                .font(.system(size: 12, weight: .semibold))
                 .monospacedDigit()
                 .foregroundStyle(entry.isCompleted ? WidgetTheme.accent(for: colorScheme) : WidgetTheme.muted(for: colorScheme))
-                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .center)
         }
         .padding()
     }
@@ -73,6 +85,7 @@ struct SmallWidgetView: View {
 
     private var statusText: String {
         guard entry.isDueToday else { return "Day off" }
-        return "\(entry.completionCount)/\(entry.timesToComplete)"
+        if entry.isCompleted { return "Done" }
+        return "\(entry.completionCount) of \(entry.timesToComplete)"
     }
 }

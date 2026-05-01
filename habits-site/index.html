@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habits & Things — Simple habit & thing tracking for iOS and Mac</title>
+  <meta name="description"
+    content="A minimal, beautiful app for tracking habits and things on iOS and Mac. One screen, zero friction.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f0df;
+      --surface: #efe2ca;
+      --border: #d2bd96;
+      --text: #1c1721;
+      --muted: #756f7f;
+      --primary: #5a376b;
+      --accent: #ff7a57;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #100b14;
+        --surface: #1b1223;
+        --border: #3a2a45;
+        --text: #f6ead8;
+        --muted: #b1a2bd;
+        --primary: #8e63ad;
+        --accent: #c8f052;
+      }
+    }
+
+    body {
+      font-family: -apple-system, "Helvetica Neue", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+      text-align: center;
+    }
+
+    .icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      margin: 0 auto 32px;
+      box-shadow: 0 8px 32px rgba(90, 55, 107, 0.25);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-bottom: 48px;
+      line-height: 1.5;
+    }
+
+    .features {
+      display: grid;
+      gap: 16px;
+      text-align: left;
+      margin-bottom: 48px;
+    }
+
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      background: var(--primary);
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 16px rgba(90, 55, 107, 0.3);
+      border: 1px solid transparent;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .cta .btn-label {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .cta .btn-sub {
+      font-size: 0.7rem;
+      font-weight: 400;
+      opacity: 0.7;
+    }
+
+    .cta.secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(90, 55, 107, 0.35);
+    }
+
+    .cta.secondary:hover {
+      border-color: var(--primary);
+      box-shadow: 0 6px 20px rgba(90, 55, 107, 0.15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .cta:not(.secondary) {
+        color: var(--bg);
+      }
+
+      .cta.secondary {
+        color: var(--text);
+        border-color: var(--border);
+      }
+
+      .cta.secondary:hover {
+        border-color: var(--accent);
+      }
+    }
+
+    footer {
+      margin-top: 64px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    footer span {
+      display: inline-block;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img class="icon" src="/icon.png" alt="Habits app icon">
+
+    <h1>Habits & Things</h1>
+    <p class="tagline">A minimal, beautiful app for tracking habits and things.<br>One screen, zero friction.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-title">Habits & Things</div>
+        <div class="feature-desc">Track recurring habits with flexible frequencies and one-off things with due dates.
+          Switch between them instantly.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Counters & Streaks</div>
+        <div class="feature-desc">Set a target like "50 pushups" and tap to increment. See your progress at a glance
+          with simple counters.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Widgets</div>
+        <div class="feature-desc">Small, medium, and lock screen widgets show your habit progress right on your home
+          screen.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Gentle Reminders</div>
+        <div class="feature-desc">Optional local notifications at the time you choose, on the schedule your habit
+          follows.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Backup & Sync</div>
+        <div class="feature-desc">Local JSON export and import. Optional cloud sync with your account across devices.
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Beautiful Palettes</div>
+        <div class="feature-desc">Four artist-inspired color themes. Follows your system dark and light mode
+          automatically.</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta" href="https://apps.apple.com/cl/app/habits-things/id6751052670">
+        <span class="btn-label"><span class="btn-sub">Download on the</span>App Store (iOS)</span>
+      </a>
+      <a class="cta secondary" href="/download">
+        <span class="btn-label"><span class="btn-sub">Version 2.0</span>Download for Mac</span>
+      </a>
+    </div>
+
+    <footer>
+      <p><a href="/privacy">Privacy Policy</a><span aria-hidden="true">·</span><a href="/download.sha256">SHA-256</a>
+      </p>
+    </footer>
+  </div>
+</body>
+
+</html>

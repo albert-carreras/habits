@@ -8,7 +8,7 @@ enum HabitWidgetSyncService {
         let descriptor = FetchDescriptor<Habit>(sortBy: [SortDescriptor(\.name)])
         guard let habits = try? context.fetch(descriptor) else { return false }
 
-        return sync(habits: habits, date: date)
+        return sync(habits: habits.filter { $0.syncDeletedAt == nil }, date: date)
     }
 
     @discardableResult
@@ -31,7 +31,8 @@ enum HabitWidgetSyncService {
     static func makeSnapshot(habits: [Habit], date: Date = .now) -> HabitWidgetSnapshot {
         HabitWidgetSnapshot(
             generatedAt: date,
-            habits: habits.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+            habits: habits.filter { $0.syncDeletedAt == nil }
+                .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
                 .map { widgetItem(for: $0, date: date) }
         )
     }
@@ -47,7 +48,7 @@ enum HabitWidgetSyncService {
             customIntervalValue: habit.customIntervalValue,
             customIntervalUnitRawValue: habit.customIntervalUnit?.rawValue,
             startDate: habit.startDate,
-            completions: habit.completions.map {
+            completions: habit.completions.filter { $0.syncDeletedAt == nil }.map {
                 HabitWidgetCompletion(date: $0.date, count: $0.count)
             }
         )
@@ -69,7 +70,7 @@ enum HabitWidgetSyncService {
         )
 
         return habit.completions
-            .filter { $0.date >= periodStart && $0.date < periodEnd }
+            .filter { $0.syncDeletedAt == nil && $0.date >= periodStart && $0.date < periodEnd }
             .reduce(0) { $0 + $1.count }
     }
 

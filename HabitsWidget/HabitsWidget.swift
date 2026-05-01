@@ -5,7 +5,8 @@ import SwiftUI
 struct HabitsWidgetBundle: WidgetBundle {
     var body: some Widget {
         HabitsSmallWidget()
-        HabitsMediumWidget()
+        ThingsSmallWidget()
         HabitsLockScreenWidget()
+        AddThingLockScreenWidget()
     }
 }

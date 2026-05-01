@@ -3,6 +3,7 @@ options:
   bundleIdPrefix: com.albertc.habit
   deploymentTarget:
     iOS: "17.0"
+    macOS: "14.0"
   xcodeVersion: "16.0"
   generateEmptyDirectories: true
 
@@ -12,6 +13,14 @@ settings:
     DEVELOPMENT_TEAM: YH4QJW8XNH
     MARKETING_VERSION: "1.1"
     CURRENT_PROJECT_VERSION: "2"
+
+packages:
+  Supabase:
+    url: https://github.com/supabase-community/supabase-swift.git
+    exactVersion: 2.45.0
+  GoogleSignIn:
+    url: https://github.com/google/GoogleSignIn-iOS.git
+    exactVersion: 9.1.0
 
 targets:
   Habits:
@@ -24,6 +33,11 @@ targets:
       properties:
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - com.albertc.habit
+          - CFBundleURLSchemes:
+              - com.googleusercontent.apps.94500561889-nipnafo2ubg1td8icodvrnmltius33ud
         ITSAppUsesNonExemptEncryption: false
         UIApplicationSceneManifest:
           UIApplicationSupportsMultipleScenes: false
@@ -49,6 +63,12 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
     dependencies:
       - target: HabitsWidgetExtension
+      - package: Supabase
+        product: Supabase
+      - package: GoogleSignIn
+        product: GoogleSignIn
+      - package: GoogleSignIn
+        product: GoogleSignInSwift
 
   HabitsTests:
     type: bundle.unit-test
@@ -62,6 +82,57 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
     dependencies:
       - target: Habits
+
+  HabitsMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: Habits
+        excludes:
+          - Info.plist
+    info:
+      path: HabitsMac/Info.plist
+      properties:
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - com.albertc.habit
+          - CFBundleURLSchemes:
+              - com.googleusercontent.apps.94500561889-nipnafo2ubg1td8icodvrnmltius33ud
+        ITSAppUsesNonExemptEncryption: false
+        LSApplicationCategoryType: public.app-category.productivity
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.albertc.habit.mac
+        PRODUCT_NAME: "Habits & Things"
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        SWIFT_EMIT_LOC_STRINGS: YES
+        ENABLE_PREVIEWS: YES
+        CODE_SIGN_ENTITLEMENTS: HabitsMac/HabitsMac.entitlements
+    dependencies:
+      - package: Supabase
+        product: Supabase
+      - package: GoogleSignIn
+        product: GoogleSignIn
+      - package: GoogleSignIn
+        product: GoogleSignInSwift
+
+  HabitsMacTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - HabitsMacTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.albertc.habit.mac.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Habits.app/Contents/MacOS/Habits"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+    dependencies:
+      - target: HabitsMac
 
   HabitsUITests:
     type: bundle.ui-testing
@@ -123,6 +194,26 @@ schemes:
     archive:
       config: Release
 
+  HabitsMac:
+    build:
+      targets:
+        HabitsMac: all
+        HabitsMacTests: [test]
+    test:
+      config: Debug
+      targets:
+        - HabitsMacTests
+    run:
+      config: Debug
+      executable: HabitsMac
+    profile:
+      config: Release
+      executable: HabitsMac
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
   HabitsWidgetSmall:
     build:
       targets:
@@ -142,7 +233,7 @@ schemes:
     archive:
       config: Release
 
-  HabitsWidgetMedium:
+  ThingsWidgetSmall:
     build:
       targets:
         HabitsWidgetExtension: all
@@ -150,12 +241,12 @@ schemes:
       config: Debug
       executable: HabitsWidgetExtension
       environmentVariables:
-        _XCWidgetKind: HabitsMediumWidget
+        _XCWidgetKind: ThingsSmallWidget
     profile:
       config: Release
       executable: HabitsWidgetExtension
       environmentVariables:
-        _XCWidgetKind: HabitsMediumWidget
+        _XCWidgetKind: ThingsSmallWidget
     analyze:
       config: Debug
     archive:
@@ -175,6 +266,25 @@ schemes:
       executable: HabitsWidgetExtension
       environmentVariables:
         _XCWidgetKind: HabitsLockScreenWidget
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  AddThingWidgetLockScreen:
+    build:
+      targets:
+        HabitsWidgetExtension: all
+    run:
+      config: Debug
+      executable: HabitsWidgetExtension
+      environmentVariables:
+        _XCWidgetKind: AddThingLockScreenWidget
+    profile:
+      config: Release
+      executable: HabitsWidgetExtension
+      environmentVariables:
+        _XCWidgetKind: AddThingLockScreenWidget
     analyze:
       config: Debug
     archive:
